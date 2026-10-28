@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #0B0E13; }
+  a { color: #0080FF; text-decoration: none; }
+  a:hover { color: #3D9DFF; }
+</style>
+</helmet>
+
+<div style="font-family: Archivo, system-ui, sans-serif; background: #0B0E13; color: #F7F8FA; padding: 72px 64px 120px; display: flex; flex-direction: column; gap: 96px; width: 1440px; box-sizing: border-box;">
+
+  <header style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #22293A; padding-bottom: 28px;">
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.18em; color: #7E8AA0; text-transform: uppercase;">Identidad de marca — v1</div>
+      <div style="font-size: 54px; font-weight: 700; letter-spacing: -0.03em; line-height: 1;">Vástago Studio</div>
+      <div style="font-size: 18px; color: #A8B0BC; max-width: 620px; line-height: 1.5;">Diseño y desarrollo de software. Sistema visual técnico, sobrio y mínimo, construido alrededor del azul existente.</div>
+    </div>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #5A6472; text-align: right; line-height: 1.8;">Logo · Paleta<br>Tipografía · Aplicaciones</div>
+  </header>
+
+  <section style="display: flex; flex-direction: column; gap: 32px;">
+    <div style="display: flex; align-items: baseline; gap: 16px;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #0080FF; letter-spacing: 0.14em;">01</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.02em;">Logotipo</h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px;">
+      <div style="background: #F7F8FA; border-radius: 4px; padding: 80px 64px; display: flex; align-items: center; justify-content: center; min-height: 300px;">
+        <div style="display: flex; align-items: center; gap: 22px;">
+          <div style="width: 68px; height: 68px; background: #0080FF; border-radius: 14px; display: flex; align-items: center; justify-content: center;">
+            <span style="color: #fff; font-size: 26px; font-weight: 800; letter-spacing: -0.02em;">VST</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px;">
+            <span style="color: #0B0E13; font-size: 42px; font-weight: 700; letter-spacing: -0.035em; line-height: 1;">Vástago</span>
+            <span style="color: #5A6472; font-size: 15px; font-weight: 500; letter-spacing: 0.32em; text-transform: uppercase;">Studio</span>
+          </div>
+        </div>
+      </div>
+      <div style="background: #11161F; border: 1px solid #22293A; border-radius: 4px; padding: 32px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #7E8AA0; text-transform: uppercase;">Lockup principal</div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #A8B0BC;">Monograma cuadrado + palabra. El monograma conserva la proporción y el radio del logo actual, así que el avatar existente sigue siendo válido. La palabra se fija en Archivo 700 con tracking cerrado; "Studio" actúa como bajada, nunca al mismo peso.</p>
+        <div style="height: 1px; background: #22293A;"></div>
+        <div style="display: flex; flex-direction: column; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A8B0BC;">
+          <div style="display: flex; justify-content: space-between;"><span style="color: #5A6472;">Altura mín. digital</span><span>24 px</span></div>
+          <div style="display: flex; justify-content: space-between;"><span style="color: #5A6472;">Altura mín. impresa</span><span>8 mm</span></div>
+          <div style="display: flex; justify-content: space-between;"><span style="color: #5A6472;">Área de respeto</span><span>= alto del monograma / 2</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px;">
+      <div style="background: #F7F8FA; border-radius: 4px; padding: 40px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px; min-height: 220px;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+          <div style="width: 52px; height: 52px; background: #0080FF; border-radius: 11px; display: flex; align-items: center; justify-content: center;"><span style="color: #fff; font-size: 20px; font-weight: 800; letter-spacing: -0.02em;">VST</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+            <span style="color: #0B0E13; font-size: 24px; font-weight: 700; letter-spacing: -0.035em; line-height: 1;">Vástago</span>
+            <span style="color: #5A6472; font-size: 10px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase;">Studio</span>
+          </div>
+        </div>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #8A93A3; text-transform: uppercase;">Vertical</span>
+      </div>
+
+      <div style="background: #F7F8FA; border-radius: 4px; padding: 40px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px; min-height: 220px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="width: 44px; height: 44px; background: #0B0E13; border-radius: 9px; display: flex; align-items: center; justify-content: center;"><span style="color: #fff; font-size: 17px; font-weight: 800; letter-spacing: -0.02em;">VST</span></div>
+          <div style="display: flex; flex-direction: column; gap: 1px;">
+            <span style="color: #0B0E13; font-size: 26px; font-weight: 700; letter-spacing: -0.035em; line-height: 1;">Vástago</span>
+            <span style="color: #5A6472; font-size: 10px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase;">Studio</span>
+          </div>
+        </div>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #8A93A3; text-transform: uppercase;">Monocromo</span>
+      </div>
+
+      <div style="background: #0080FF; border-radius: 4px; padding: 40px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px; min-height: 220px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="width: 44px; height: 44px; border: 2px solid #fff; border-radius: 9px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;"><span style="color: #fff; font-size: 16px; font-weight: 800; letter-spacing: -0.02em;">VST</span></div>
+          <div style="display: flex; flex-direction: column; gap: 1px;">
+            <span style="color: #fff; font-size: 26px; font-weight: 700; letter-spacing: -0.035em; line-height: 1;">Vástago</span>
+            <span style="color: rgba(255,255,255,0.75); font-size: 10px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase;">Studio</span>
+          </div>
+        </div>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: rgba(255,255,255,0.85); text-transform: uppercase;">Sobre color</span>
+      </div>
+
+      <div style="background: #11161F; border: 1px solid #22293A; border-radius: 4px; padding: 40px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px; min-height: 220px;">
+        <div style="display: flex; align-items: center; gap: 18px;">
+          <div style="width: 56px; height: 56px; background: #0080FF; border-radius: 12px; display: flex; align-items: center; justify-content: center;"><span style="color: #fff; font-size: 21px; font-weight: 800; letter-spacing: -0.02em;">VST</span></div>
+          <div style="width: 56px; height: 56px; background: #F7F8FA; border-radius: 12px; display: flex; align-items: center; justify-content: center;"><span style="color: #0B0E13; font-size: 21px; font-weight: 800; letter-spacing: -0.02em;">VST</span></div>
+        </div>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #7E8AA0; text-transform: uppercase;">Isotipo suelto</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 32px;">
+    <div style="display: flex; align-items: baseline; gap: 16px;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #0080FF; letter-spacing: 0.14em;">02</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.02em;">Paleta</h2>
+      <span style="font-size: 15px; color: #7E8AA0;">Un azul de marca, una escala de grafitos, tres señales funcionales.</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;">
+      <div style="border-radius: 4px; overflow: hidden; border: 1px solid #22293A;">
+        <div style="background: #0080FF; height: 200px;"></div>
+        <div style="background: #11161F; padding: 22px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-size: 19px; font-weight: 600;">Azul Vástago</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A8B0BC; line-height: 1.8;">#0080FF<br>rgb(0 128 255)<br>oklch(0.61 0.23 254)</div>
+          <div style="font-size: 14px; color: #7E8AA0; line-height: 1.5;">Color único de marca. Acciones, enlaces, isotipo, un dato por pieza.</div>
+        </div>
+      </div>
+      <div style="border-radius: 4px; overflow: hidden; border: 1px solid #22293A;">
+        <div style="background: #0B0E13; height: 200px;"></div>
+        <div style="background: #11161F; padding: 22px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-size: 19px; font-weight: 600;">Grafito 900</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A8B0BC; line-height: 1.8;">#0B0E13<br>rgb(11 14 19)<br>oklch(0.18 0.01 260)</div>
+          <div style="font-size: 14px; color: #7E8AA0; line-height: 1.5;">Fondo oscuro y tinta principal. Es el color que da el registro serio.</div>
+        </div>
+      </div>
+      <div style="border-radius: 4px; overflow: hidden; border: 1px solid #22293A;">
+        <div style="background: #F7F8FA; height: 200px;"></div>
+        <div style="background: #11161F; padding: 22px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-size: 19px; font-weight: 600;">Niebla 50</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A8B0BC; line-height: 1.8;">#F7F8FA<br>rgb(247 248 250)<br>oklch(0.98 0.003 255)</div>
+          <div style="font-size: 14px; color: #7E8AA0; line-height: 1.5;">Fondo claro de documentos, propuestas y facturas.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #7E8AA0; text-transform: uppercase;">Escala de grafitos</div>
+      <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;"><div style="height: 76px; background: #0B0E13; border: 1px solid #22293A; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A93A3;">900 #0B0E13</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;"><div style="height: 76px; background: #11161F; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A93A3;">800 #11161F</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;"><div style="height: 76px; background: #22293A; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A93A3;">700 #22293A</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;"><div style="height: 76px; background: #5A6472; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A93A3;">500 #5A6472</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;"><div style="height: 76px; background: #A8B0BC; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A93A3;">300 #A8B0BC</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;"><div style="height: 76px; background: #E6E9EE; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A93A3;">100 #E6E9EE</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;"><div style="height: 76px; background: #F7F8FA; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A93A3;">50 #F7F8FA</span></div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #7E8AA0; text-transform: uppercase;">Azules de soporte</div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;">
+          <div style="display: flex; flex-direction: column; gap: 8px;"><div style="height: 76px; background: #003D80; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A93A3;">Profundo #003D80</span></div>
+          <div style="display: flex; flex-direction: column; gap: 8px;"><div style="height: 76px; background: #3D9DFF; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A93A3;">Hover #3D9DFF</span></div>
+          <div style="display: flex; flex-direction: column; gap: 8px;"><div style="height: 76px; background: #E8F2FF; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A93A3;">Tenue #E8F2FF</span></div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #7E8AA0; text-transform: uppercase;">Señales de interfaz</div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;">
+          <div style="display: flex; flex-direction: column; gap: 8px;"><div style="height: 76px; background: #12A97B; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A93A3;">Éxito #12A97B</span></div>
+          <div style="display: flex; flex-direction: column; gap: 8px;"><div style="height: 76px; background: #C98A12; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A93A3;">Aviso #C98A12</span></div>
+          <div style="display: flex; flex-direction: column; gap: 8px;"><div style="height: 76px; background: #D4483B; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A93A3;">Error #D4483B</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; border-top: 1px solid #22293A; padding-top: 24px;">
+      <div style="display: flex; flex-direction: column; gap: 8px;"><div style="font-size: 15px; font-weight: 600;">Proporción</div><div style="font-size: 14px; color: #7E8AA0; line-height: 1.55;">70% neutro, 25% grafito oscuro, 5% azul. El azul no se usa como fondo de área grande salvo en el isotipo.</div></div>
+      <div style="display: flex; flex-direction: column; gap: 8px;"><div style="font-size: 15px; font-weight: 600;">Contraste</div><div style="font-size: 14px; color: #7E8AA0; line-height: 1.55;">Azul sobre blanco: 3.6:1 — solo para texto de 24px o más. Para texto corrido usar Azul profundo.</div></div>
+      <div style="display: flex; flex-direction: column; gap: 8px;"><div style="font-size: 15px; font-weight: 600;">Sin degradados</div><div style="font-size: 14px; color: #7E8AA0; line-height: 1.55;">Color plano siempre. Es lo que sostiene la lectura técnica de la marca.</div></div>
+      <div style="display: flex; flex-direction: column; gap: 8px;"><div style="font-size: 15px; font-weight: 600;">Impresión</div><div style="font-size: 14px; color: #7E8AA0; line-height: 1.55;">Azul: Pantone 2175 C aprox. / CMYK 88 47 0 0. Grafito: 100% negro enriquecido.</div></div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 32px;">
+    <div style="display: flex; align-items: baseline; gap: 16px;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #0080FF; letter-spacing: 0.14em;">03</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.02em;">Tipografía</h2>
+      <span style="font-size: 15px; color: #7E8AA0;">Archivo para todo lo que se lee; JetBrains Mono para lo que se mide.</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <div style="background: #11161F; border: 1px solid #22293A; border-radius: 4px; padding: 36px; display: flex; flex-direction: column; gap: 22px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;"><span style="font-size: 22px; font-weight: 600;">Archivo</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #5A6472;">400 · 500 · 600 · 700 · 800</span></div>
+        <div style="font-size: 62px; font-weight: 700; letter-spacing: -0.035em; line-height: 1;">Aa Vástago</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7E8AA0; line-height: 1.9;">Display 54/1.0 · -0.03em<br>Título 28/1.2 · -0.02em<br>Cuerpo 16/1.6 · 0<br>Nota 14/1.5 · 0</div>
+      </div>
+      <div style="background: #11161F; border: 1px solid #22293A; border-radius: 4px; padding: 36px; display: flex; flex-direction: column; gap: 22px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;"><span style="font-size: 22px; font-weight: 600; font-family: 'JetBrains Mono', monospace;">JetBrains Mono</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #5A6472;">400 · 500</span></div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 52px; font-weight: 500; letter-spacing: -0.02em; line-height: 1;">0123 &lt;/&gt;</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7E8AA0; line-height: 1.9;">Etiquetas 11/1 · 0.16em mayúsculas<br>Datos y cifras 12–14/1.8<br>Código y N° de factura<br>Nunca para texto corrido</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 32px;">
+    <div style="display: flex; align-items: baseline; gap: 16px;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #0080FF; letter-spacing: 0.14em;">04</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.02em;">Aplicaciones</h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #7E8AA0; text-transform: uppercase;">Avatar · redes</div>
+        <div style="background: #11161F; border: 1px solid #22293A; border-radius: 4px; padding: 40px; display: flex; align-items: center; gap: 28px;">
+          <div style="width: 96px; height: 96px; background: #0080FF; border-radius: 20px; display: flex; align-items: center; justify-content: center;"><span style="color: #fff; font-size: 36px; font-weight: 800; letter-spacing: -0.02em;">VST</span></div>
+          <div style="width: 56px; height: 56px; background: #0080FF; border-radius: 12px; display: flex; align-items: center; justify-content: center;"><span style="color: #fff; font-size: 21px; font-weight: 800; letter-spacing: -0.02em;">VST</span></div>
+          <div style="width: 32px; height: 32px; background: #0080FF; border-radius: 7px; display: flex; align-items: center; justify-content: center;"><span style="color: #fff; font-size: 12px; font-weight: 800; letter-spacing: -0.02em;">VST</span></div>
+          <div style="width: 96px; height: 96px; background: #0080FF; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><span style="color: #fff; font-size: 30px; font-weight: 800; letter-spacing: -0.02em;">VST</span></div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #7E8AA0; text-transform: uppercase;">Tarjeta</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div style="background: #0B0E13; border: 1px solid #22293A; border-radius: 6px; padding: 26px; aspect-ratio: 1.75; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="width: 38px; height: 38px; background: #0080FF; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><span style="color: #fff; font-size: 14px; font-weight: 800;">VST</span></div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 16px; font-weight: 600;">Nombre Apellido</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7E8AA0;">Software Engineer</span>
+            </div>
+          </div>
+          <div style="background: #F7F8FA; border-radius: 6px; padding: 26px; aspect-ratio: 1.75; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column; gap: 1px;">
+              <span style="color: #0B0E13; font-size: 20px; font-weight: 700; letter-spacing: -0.035em; line-height: 1;">Vástago</span>
+              <span style="color: #5A6472; font-size: 8px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase;">Studio</span>
+            </div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #5A6472; line-height: 1.7;">hola@vastago.studio<br>vastago.studio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #7E8AA0; text-transform: uppercase;">Web · encabezado</div>
+        <div style="background: #0B0E13; border: 1px solid #22293A; border-radius: 4px; overflow: hidden;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px 28px; border-bottom: 1px solid #22293A;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 30px; height: 30px; background: #0080FF; border-radius: 7px; display: flex; align-items: center; justify-content: center;"><span style="color: #fff; font-size: 11px; font-weight: 800;">VST</span></div>
+              <span style="font-size: 17px; font-weight: 700; letter-spacing: -0.03em;">Vástago</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 26px; font-size: 14px; color: #A8B0BC;">
+              <span>Servicios</span><span>Trabajo</span><span>Equipo</span>
+              <span style="background: #0080FF; color: #fff; font-weight: 500; padding: 9px 16px; border-radius: 4px;">Hablemos</span>
+            </div>
+          </div>
+          <div style="padding: 56px 28px 64px; display: flex; flex-direction: column; gap: 20px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; color: #0080FF; text-transform: uppercase;">Diseño y desarrollo de software</div>
+            <div style="font-size: 46px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; max-width: 560px;">Construimos el software que su operación ya necesitaba.</div>
+            <div style="font-size: 16px; color: #A8B0BC; max-width: 480px; line-height: 1.6;">Producto, interfaz e ingeniería para empresas medianas y grandes.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #7E8AA0; text-transform: uppercase;">Factura · propuesta</div>
+        <div style="background: #F7F8FA; border-radius: 4px; padding: 32px; display: flex; flex-direction: column; gap: 26px; flex: 1;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #E6E9EE; padding-bottom: 20px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 34px; height: 34px; background: #0080FF; border-radius: 7px; display: flex; align-items: center; justify-content: center;"><span style="color: #fff; font-size: 13px; font-weight: 800;">VST</span></div>
+              <div style="display: flex; flex-direction: column; gap: 1px;">
+                <span style="color: #0B0E13; font-size: 16px; font-weight: 700; letter-spacing: -0.03em; line-height: 1;">Vástago</span>
+                <span style="color: #5A6472; font-size: 7px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase;">Studio</span>
+              </div>
+            </div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #5A6472; text-align: right; line-height: 1.7;">FACTURA 0042<br>14.09.2026</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px; font-size: 13px; color: #5A6472;">
+            <div style="display: flex; justify-content: space-between;"><span style="color: #0B0E13;">Diseño de producto — Sprint 3</span><span style="font-family: 'JetBrains Mono', monospace;">$ 4.800</span></div>
+            <div style="display: flex; justify-content: space-between;"><span style="color: #0B0E13;">Desarrollo frontend</span><span style="font-family: 'JetBrains Mono', monospace;">$ 7.200</span></div>
+            <div style="display: flex; justify-content: space-between; border-top: 1px solid #E6E9EE; padding-top: 14px;"><span style="color: #0B0E13; font-weight: 600;">Total</span><span style="font-family: 'JetBrains Mono', monospace; color: #003D80; font-weight: 500;">$ 12.000</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 16px;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #0080FF; letter-spacing: 0.14em;">05</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.02em;">Qué no hacer</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px;">
+      <div style="background: #11161F; border: 1px solid #22293A; border-radius: 4px; padding: 26px; display: flex; flex-direction: column; gap: 10px;"><span style="color: #D4483B; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em;">NO</span><span style="font-size: 15px; color: #A8B0BC; line-height: 1.55;">Estirar, inclinar o poner sombra al monograma.</span></div>
+      <div style="background: #11161F; border: 1px solid #22293A; border-radius: 4px; padding: 26px; display: flex; flex-direction: column; gap: 10px;"><span style="color: #D4483B; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em;">NO</span><span style="font-size: 15px; color: #A8B0BC; line-height: 1.55;">Cambiar el azul por otro tono ni degradarlo.</span></div>
+      <div style="background: #11161F; border: 1px solid #22293A; border-radius: 4px; padding: 26px; display: flex; flex-direction: column; gap: 10px;"><span style="color: #D4483B; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em;">NO</span><span style="font-size: 15px; color: #A8B0BC; line-height: 1.55;">Igualar el peso de "Studio" al de "Vástago".</span></div>
+      <div style="background: #11161F; border: 1px solid #22293A; border-radius: 4px; padding: 26px; display: flex; flex-direction: column; gap: 10px;"><span style="color: #D4483B; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em;">NO</span><span style="font-size: 15px; color: #A8B0BC; line-height: 1.55;">Quitar la tilde de Vástago en la palabra.</span></div>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+</body>
+</html>
