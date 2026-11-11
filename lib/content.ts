@@ -3,12 +3,21 @@ export const studio = {
   email: "hola@vastago.studio",
 };
 
-// Portadas editoriales provisionales. Los casos y capturas reales llegan en la etapa 2.
 export const projects = [
-  { name: "Eppigo GoAMS", cover: "eppigo", word: "Eppigo", sub: "GoAMS", mark: "e" },
-  { name: "Winkelman", cover: "winkelman", word: "Winkelman", sub: "", mark: "W" },
-  { name: "Teknergy", cover: "teknergy", word: "Teknergy", sub: "", mark: "T" },
-  { name: "Tienda Borgatta", cover: "borgatta", word: "borgatta", sub: "Tienda", mark: "b" },
+  { name: "Eppigo", cover: "eppigo", word: "Eppigo", sub: "", mark: "e", image: "eppigo-4.png", description: "Marketplace de seguros para cotizar, comparar y contratar pólizas en línea en Estados Unidos, en pocos pasos." },
+  { name: "Winkelman", cover: "winkelman", word: "Winkelman", sub: "", mark: "W", image: "winkelman-1.png", description: "Sitio web renovado para presentar con claridad los servicios de ingeniería civil y topografía de Winkelman y facilitar el contacto con sus clientes en Estados Unidos." },
+  {
+    name: "GoAMS",
+    cover: "goams",
+    image: "go-ams.png",
+    description: "Plataforma de gestión para agencias y agentes de seguros, con un panel para consultar pólizas, clientes, citas y comisiones.",
+  },
+  {
+    name: "VSTCONTROL",
+    cover: "vstcontrol",
+    image: "plataforma-de-control.png",
+    description: "Plataforma de gestión interna para dar seguimiento a facturas vencidas, cuentas por pagar y por cobrar, y al avance de los proyectos. Incluye un asistente de inteligencia artificial para interactuar con la plataforma.",
+  },
 ];
 
 export const services = [

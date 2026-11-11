@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Menu, Motion } from "@/components/interactions";
 import { projects } from "@/lib/content";
 import { Services } from "@/components/services";
@@ -30,8 +31,9 @@ export default function Home() {
         <div className="section-intro" data-reveal><h2 id="work-title">Trabajo<br />seleccionado.</h2><p>Cada proyecto empieza con una conversación.<br />Estos son algunos de los nombres que forman parte de nuestro recorrido.</p></div>
         <div className="projects">
           {projects.map(project => <article className={`project ${project.cover}`} key={project.name} data-reveal>
-            <div className="project-cover" aria-hidden="true"><span className="cover-mark">{project.mark}</span><div className="cover-word">{project.word}<span>{project.sub}</span></div><span className="cover-caption">{project.name}</span></div>
+            {project.image ? <div className="project-cover project-photo"><Image src={`/images/projects/${project.image}`} alt={`Vista de ${project.name}`} fill sizes="(max-width: 650px) 100vw, (max-width: 1800px) 50vw, 900px" /></div> : <div className="project-cover" aria-hidden="true"><span className="cover-mark">{project.mark}</span><div className="cover-word">{project.word}<span>{project.sub}</span></div><span className="cover-caption">{project.name}</span></div>}
             <h3>{project.name}</h3>
+            <p className="project-description">{project.description}</p>
           </article>)}
         </div>
       </section>
