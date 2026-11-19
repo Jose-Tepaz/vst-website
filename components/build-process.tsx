@@ -5,8 +5,8 @@ import { useEffect, useRef } from "react";
 const stages = [
   { title: "Entender", phase: "El punto de partida", description: "Conversamos sobre tu negocio, las personas y el problema. Definimos qué construir y por qué.", result: "Una dirección compartida.", detail: "Negocio · Personas · Alcance" },
   { title: "Diseñar", phase: "La idea toma forma", description: "Damos forma a los flujos y a la experiencia visual. Probamos la dirección antes de desarrollar.", result: "Una experiencia que puedes probar.", detail: "UX/UI · Flujos · Prototipos" },
-  { title: "Desarrollar", phase: "Del diseño al código", description: "Convertimos el diseño en software e integramos las herramientas que el proyecto necesita.", result: "Tu producto toma forma.", detail: "Desarrollo · Integración · Pruebas" },
-  { title: "Desplegar", phase: "Listo para salir", description: "Preparamos la salida, revisamos el funcionamiento y acordamos cómo acompañar lo que sigue.", result: "Listo para salir al mundo.", detail: "Despliegue · Revisión · Acompañamiento" },
+  { title: "Desarrollar", phase: "Del diseño al código", description: "Convertimos el diseño en software e integramos las herramientas que el proyecto necesita.", result: "Un producto construido y probado.", detail: "Desarrollo · Integración · Pruebas" },
+  { title: "Desplegar", phase: "Listo para salir", description: "Hacemos el despliegue: publicamos tu producto para que empiece a usarse. Revisamos que todo funcione y acordamos cómo acompañar lo que sigue.", result: "Tu producto, listo para usarse.", detail: "Despliegue · Revisión · Acompañamiento" },
 ];
 
 export function BuildProcess() {
@@ -35,7 +35,7 @@ export function BuildProcess() {
 
   return <section id="proceso" className="method" aria-labelledby="process-title" ref={sectionRef}>
     <div className="method-head wrap">
-      <div className="method-intro"><p>Una conversación continua.<br />Decisiones compartidas en cada etapa.</p><p>Del primer intercambio a la puesta en marcha, un mismo equipo cuida el diseño y la tecnología.</p></div>
+      <div className="method-intro"><p>Una conversación continua.<br />Decisiones compartidas en cada etapa.</p><p>Del primer intercambio al despliegue, un mismo equipo cuida el diseño y la tecnología.</p></div>
       <h2 id="process-title" data-reveal>Así lo construimos.</h2>
       <div className="method-bottom"><p>Cuatro etapas. Una misma dirección.</p><a href="#etapa-entender">Explora el proceso <span aria-hidden="true">↓</span></a></div>
       <nav className="method-nav" aria-label="Etapas del proyecto">{stages.map(stage => <a key={stage.title} href={`#etapa-${stage.title.toLowerCase()}`}>{stage.title}</a>)}</nav>

@@ -21,14 +21,14 @@ export default function Home() {
         <div className="hero-content wrap">
         <h1 id="hero-title">Del diseño<br />al despliegue.</h1>
         <div className="hero-bottom">
-          <p>Somos Vástago. Un estudio boutique de diseño y desarrollo de software. Creamos productos digitales, de la primera idea al mundo real.</p>
+          <p>Somos Vástago. Un estudio boutique de diseño y desarrollo de software. Creamos productos digitales, de la primera idea a las personas que lo usan.</p>
         </div>
         </div>
         <PhraseRibbon />
       </section>
 
       <section id="proyectos" className="work wrap" aria-labelledby="work-title">
-        <div className="section-intro" data-reveal><h2 id="work-title">Trabajo<br />seleccionado.</h2><p>Cada proyecto empieza con una conversación.<br />Estos son algunos de los nombres que forman parte de nuestro recorrido.</p></div>
+        <div className="section-intro" data-reveal><h2 id="work-title">Trabajo<br />seleccionado.</h2><p>Cada proyecto empieza con una conversación.<br />Estos son algunos de los productos que hemos diseñado y desarrollado.</p></div>
         <div className="projects">
           {projects.map(project => <article className={`project ${project.cover}`} key={project.name} data-reveal>
             {project.image ? <div className="project-cover project-photo"><Image src={`/images/projects/${project.image}`} alt={`Vista de ${project.name}`} fill sizes="(max-width: 650px) 100vw, (max-width: 1800px) 50vw, 900px" /></div> : <div className="project-cover" aria-hidden="true"><span className="cover-mark">{project.mark}</span><div className="cover-word">{project.word}<span>{project.sub}</span></div><span className="cover-caption">{project.name}</span></div>}
@@ -42,10 +42,10 @@ export default function Home() {
 
       <section id="estudio" className="studio studio-reframed wrap" aria-labelledby="studio-title">
         <div className="studio-presentation">
-          <div className="studio-introduction"><h2 id="studio-title" data-reveal>Tu visión.<br />Nuestro compromiso.</h2><p data-reveal>Somos Vástago, un estudio boutique de diseño y desarrollo de software. Nos involucramos en tu negocio para construir un producto que tenga sentido para quienes lo usan.</p><a href="#contacto" data-reveal>Conozcamos tu proyecto <span aria-hidden="true">↗</span></a></div>
+          <div className="studio-introduction"><h2 id="studio-title" data-reveal>Tu visión.<br />Nuestro compromiso.</h2><p data-reveal>Tú sabes qué quieres lograr y a quién quieres llegar. Nosotros nos involucramos para construir un producto digital que tenga sentido para quienes lo usan. Nos comprometemos a acompañarte en cada decisión de diseño y tecnología desde la primera conversación.</p><a href="#contacto" data-reveal>Conozcamos tu proyecto <span aria-hidden="true">↗</span></a></div>
           <div className="studio-tenure" data-reveal><strong>4</strong><p>años conectando<br />diseño y desarrollo.</p><span>De la primera idea al despliegue.</span></div>
         </div>
-        <div className="studio-principles"><article data-reveal><h3>Cerca de tu equipo.</h3><p>Conversamos contigo, entendemos el contexto y compartimos las decisiones. Tu conocimiento del negocio forma parte del proyecto desde el inicio.</p></article><article data-reveal><h3>De principio a fin.</h3><p>Diseñamos pensando en cómo se construye y desarrollamos cuidando la experiencia. Un mismo equipo acompaña el producto hasta su puesta en marcha.</p></article></div>
+        <div className="studio-principles"><article data-reveal><h3>Cerca de tu equipo.</h3><p>Conversamos contigo, entendemos el contexto y compartimos las decisiones. Tu conocimiento del negocio forma parte del proyecto desde el inicio.</p></article><article data-reveal><h3>De principio a fin.</h3><p>Diseñamos pensando en cómo se construye y desarrollamos cuidando la experiencia. Un mismo equipo acompaña el producto hasta su despliegue.</p></article></div>
       </section>
 
       <BuildProcess />

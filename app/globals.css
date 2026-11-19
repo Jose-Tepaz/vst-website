@@ -135,7 +135,7 @@
 .studio-presentation{display:grid;grid-template-columns:1.6fr 1fr;gap:8vw;align-items:stretch}
 .studio-introduction{display:flex;flex-direction:column;align-items:flex-start}
 .studio-introduction h2{font-size:clamp(38px,4.9vw,76px);line-height:1.04;letter-spacing:-.06em}
-.studio-introduction>p{margin-top:35px;max-width:560px;font-size:20px;line-height:1.55}
+.studio-introduction>p{margin-top:35px;max-width:620px;font-size:20px;line-height:1.55}
 .studio-introduction>a{display:flex;align-items:center;gap:32px;min-height:44px;margin-top:28px;font-size:16px;transition:transform .2s}
 .studio-introduction>a:hover{transform:translateX(5px)}
 .studio-tenure{background:var(--surface);padding:40px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
