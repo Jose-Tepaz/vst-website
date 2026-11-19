@@ -254,10 +254,11 @@
 .navigation .nav-contact{background:var(--blue);color:var(--on-blue);padding:15px 22px;min-height:48px;display:flex;align-items:center;gap:22px}
 .navigation .nav-contact span{margin-left:0}
 .navigation .nav-contact:hover{color:var(--on-blue);transform:translateY(-2px)}
-/* Barra flotante tipo "isla". Cerrada: sección actual (cambia girando como un cilindro) y «···». Abierta: todas las secciones; la píldora se desliza hasta la señalada y despliega su nombre. */
-.isla{--item:44px;--gap:4px;--pad:6px;--stack:62px;--spring:cubic-bezier(.32,1.2,.5,1);--pill:rgba(11,14,19,.24);--w:calc(2 * var(--pad) + 2 * var(--item) + var(--gap) + var(--active-label,0px));--pill-w:calc(var(--item) + var(--pill-label,0px));--step:calc(var(--item) + var(--gap));position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom,0px));z-index:50;display:grid;align-items:center;width:var(--w);max-width:calc(100% - 32px);padding:var(--pad);overflow:hidden;background:var(--blue);border-radius:999px;color:var(--on-blue);box-shadow:0 1px 2px rgba(11,14,19,.18),0 16px 36px -14px rgba(0,58,128,.6),inset 0 0 0 1px rgba(255,255,255,.22),inset 0 1px 0 rgba(255,255,255,.3);opacity:0;visibility:hidden;pointer-events:none;transform:translate(-50%,24px);transition:opacity .25s,transform .3s,visibility .25s,width .5s var(--spring)}
+/* Barra flotante tipo "isla". Cerrada: sección actual (cambia con un fundido desenfocado) y «···»; en la portada, solo «···». Abierta: todas las secciones; la píldora se desliza hasta la señalada y despliega su nombre. */
+.isla{--item:44px;--gap:4px;--pad:6px;--stack:78px;--current:0px;--spring:cubic-bezier(.32,1.2,.5,1);--pill:rgba(11,14,19,.24);--w:calc(2 * var(--pad) + var(--item) + var(--current));--pill-w:calc(var(--item) + var(--pill-label,0px));--step:calc(var(--item) + var(--gap));position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom,0px));z-index:50;display:grid;align-items:center;width:var(--w);max-width:calc(100% - 32px);padding:var(--pad);overflow:hidden;background:var(--blue);border-radius:999px;color:var(--on-blue);box-shadow:0 1px 2px rgba(11,14,19,.18),0 16px 36px -14px rgba(0,58,128,.6),inset 0 0 0 1px rgba(255,255,255,.22);opacity:0;visibility:hidden;pointer-events:none;transform:translate(-50%,24px);transition:opacity .25s,transform .3s,visibility .25s,width .5s var(--spring)}
 .isla.is-visible{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
-.isla.is-open{--w:calc(2 * var(--pad) + 5 * var(--item) + 4 * var(--gap) + var(--pill-label,0px))}
+.isla.has-current{--current:calc(var(--item) + var(--active-label,0px) + var(--gap))}
+.isla.is-open{--w:calc(2 * var(--pad) + 4 * var(--item) + 3 * var(--gap) + var(--pill-label,0px))}
 .isla svg{flex:none;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.85;stroke-linecap:round;stroke-linejoin:round}
 .isla svg .f{fill:currentColor;fill-opacity:0;transition:fill-opacity .3s}
 .isla-measure{position:absolute;top:0;left:0;display:flex;visibility:hidden;pointer-events:none}
@@ -267,20 +268,20 @@
 .isla.is-open .isla-compact{opacity:0;pointer-events:none}
 .isla-panel{position:relative;opacity:0;pointer-events:none}
 .isla.is-open .isla-panel{opacity:1;pointer-events:auto;transition:opacity .25s .08s}
-.isla-current{position:relative;display:block;flex:none;width:calc(var(--item) + var(--active-label,0px));height:var(--item);border-radius:999px;background:var(--pill);box-shadow:inset 0 1px 2px rgba(11,14,19,.2);overflow:hidden;perspective:240px;transition:width .5s var(--spring),transform .3s cubic-bezier(.3,.7,.4,1)}
-.isla-roll{position:absolute;top:0;bottom:0;left:0;display:flex;align-items:center;backface-visibility:hidden}
-.isla-roll svg{margin-inline:calc((var(--item) - 20px) / 2)}
-.isla-roll svg .f{fill-opacity:.25}
-.isla-roll.is-entering{animation:isla-roll-in .45s var(--spring) both}
-.isla-roll.is-leaving{animation:isla-roll-out .3s cubic-bezier(.5,0,.75,0) both}
-@keyframes isla-roll-in{from{opacity:0;transform:translateY(70%) rotateX(-75deg)}to{opacity:1;transform:none}}
-@keyframes isla-roll-out{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-70%) rotateX(75deg)}}
-.isla-dots,.isla-close{display:grid;place-items:center;flex:none;width:var(--item);height:var(--item);border-radius:999px;color:rgba(255,255,255,.9);transition:background-color .2s,color .2s}
-.isla-close{padding:0;border:0;background:none;font:inherit;cursor:pointer}
-.isla-compact:hover .isla-dots,.isla-close:hover{background:rgba(255,255,255,.14);color:var(--on-blue)}
+.isla-current{position:relative;display:block;flex:none;width:calc(var(--item) + var(--active-label,0px));height:var(--item);border-radius:999px;background:var(--pill);overflow:hidden;transition:width .5s var(--spring),margin .5s var(--spring),opacity .2s,transform .3s cubic-bezier(.3,.7,.4,1)}
+.isla:not(.has-current) .isla-current{width:0;margin-right:calc(-1 * var(--gap));opacity:0}
+.isla-swap{position:absolute;top:0;bottom:0;left:0;display:flex;align-items:center}
+.isla-swap svg{margin-inline:calc((var(--item) - 20px) / 2)}
+.isla-swap svg .f{fill-opacity:.25}
+.isla-swap.is-entering{animation:isla-swap-in .32s cubic-bezier(.2,.7,.2,1) .1s both}
+.isla-swap.is-leaving{animation:isla-swap-out .16s ease-in both}
+@keyframes isla-swap-in{from{opacity:0;filter:blur(4px);transform:translateY(4px)}to{opacity:1;filter:blur(0);transform:none}}
+@keyframes isla-swap-out{from{opacity:1;filter:blur(0)}to{opacity:0;filter:blur(4px)}}
+.isla-dots{display:grid;place-items:center;flex:none;width:var(--item);height:var(--item);border-radius:999px;color:rgba(255,255,255,.9);transition:background-color .2s,color .2s}
+.isla-compact:hover .isla-dots{background:rgba(255,255,255,.14);color:var(--on-blue)}
 .isla-compact:active .isla-current{transform:scale(.96)}
-.isla-compact:focus-visible,.isla-panel a:focus-visible,.isla-close:focus-visible{outline:2px solid var(--paper);outline-offset:-2px}
-.isla-panel::before{content:"";position:absolute;top:0;left:0;width:var(--pill-w);height:var(--item);border-radius:999px;background:var(--pill);box-shadow:inset 0 1px 2px rgba(11,14,19,.2);opacity:0;transform:translateX(calc(var(--pill-index,0) * var(--step)));transition:transform .5s var(--spring),width .5s var(--spring),opacity .2s;pointer-events:none}
+.isla-compact:focus-visible,.isla-panel a:focus-visible{outline:2px solid var(--paper);outline-offset:-2px}
+.isla-panel::before{content:"";position:absolute;top:0;left:0;width:var(--pill-w);height:var(--item);border-radius:999px;background:var(--pill);opacity:0;transform:translateX(calc(var(--pill-index,0) * var(--step)));transition:transform .5s var(--spring),width .5s var(--spring),opacity .2s;pointer-events:none}
 .isla.has-pill .isla-panel::before{opacity:1}
 .isla-panel a{position:relative;display:flex;align-items:center;flex:none;height:var(--item);min-width:var(--item);border-radius:999px;color:rgba(255,255,255,.9);transition:color .2s}
 .isla-panel a[data-expanded],.isla-panel a[aria-current]{color:var(--on-blue)}
@@ -290,7 +291,7 @@
 .isla-label{display:block;width:0;overflow:hidden;opacity:0;transition:width .5s var(--spring),opacity .15s}
 .isla-panel a[data-expanded] .isla-label{width:var(--label);opacity:1;transition:width .5s var(--spring),opacity .3s .12s}
 /* Pantallas táctiles o estrechas: no hay "pasar el ratón", así que al abrir se ven todos los nombres bajo sus iconos. */
-@media(hover:none),(max-width:650px){.isla.is-open{--w:calc(2 * var(--pad) + 4 * var(--stack) + var(--item) + 4 * var(--gap));--pill-w:var(--stack);--step:calc(var(--stack) + var(--gap))}.isla-panel a{flex-direction:column;justify-content:center;gap:3px;width:var(--stack)}.isla-panel a svg{width:18px;height:18px;margin-inline:0}.isla-label,.isla-panel a[data-expanded] .isla-label{width:auto;opacity:1}.isla-panel .isla-text{padding-right:0;font-size:11px;line-height:1.1}}
+@media(hover:none),(max-width:650px){.isla.is-open{--w:calc(2 * var(--pad) + 4 * var(--stack) + 3 * var(--gap));--pill-w:var(--stack);--step:calc(var(--stack) + var(--gap))}.isla-panel a{flex-direction:column;justify-content:center;gap:3px;width:var(--stack)}.isla-panel a svg{width:18px;height:18px;margin-inline:0}.isla-label,.isla-panel a[data-expanded] .isla-label{width:auto;opacity:1}.isla-panel .isla-text{padding-right:0;font-size:11px;line-height:1.1}}
 .footer{padding-bottom:110px}
 @media(max-width:650px){.navigation .nav-contact{padding:16px 20px;justify-content:space-between}.isla{--gap:2px;--pad:5px;bottom:max(14px,env(safe-area-inset-bottom,0px))}.isla-text{font-size:13px;padding-right:14px}.footer{padding-bottom:100px}}
 @media(prefers-reduced-motion:reduce){.isla{transition:none;transform:translate(-50%,0)}.isla *,.isla-panel::before{transition:none!important;animation:none!important}}

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { contactHref, services } from "@/lib/content";
 
-// Iconos de Lucide (licencia ISC): layout-grid, sparkles, users, message-circle, menu, ellipsis y x.
+// Iconos de Lucide (licencia ISC): layout-grid, sparkles, users, message-circle y ellipsis.
 // Las formas con clase "f" se rellenan suavemente cuando la sección está activa.
 const sectionLinks = [
   { id: "proyectos", label: "Proyectos", icon: <><rect className="f" x="3" y="3" width="7" height="7" rx="1" /><rect className="f" x="14" y="3" width="7" height="7" rx="1" /><rect className="f" x="14" y="14" width="7" height="7" rx="1" /><rect className="f" x="3" y="14" width="7" height="7" rx="1" /></> },
@@ -11,9 +11,6 @@ const sectionLinks = [
   { id: "estudio", label: "Estudio", icon: <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle className="f" cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></> },
   { id: "contacto", label: "Hablemos", icon: <path className="f" d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /> },
 ];
-// Lo que muestra la barra compacta cuando todavía no hay sección activa (portada).
-const menuItem = { id: "", label: "Menú", icon: <><path d="M4 6h16" /><path d="M4 12h16" /><path d="M4 18h16" /></> };
-const compactItems = [...sectionLinks, menuItem];
 
 function Icon({ children }: { children: ReactNode }) {
   return <svg viewBox="0 0 24 24" aria-hidden="true">{children}</svg>;
@@ -65,7 +62,8 @@ export function Menu({ children }: { children: ReactNode }) {
 }
 
 // Barra flotante tipo "isla".
-// Cerrada: muestra la sección actual (su nombre cambia girando como un cilindro) y el botón «···».
+// Cerrada: muestra la sección actual y el botón «···»; al cambiar de sección, el nombre anterior se desvanece
+// y el nuevo entra desenfocado hasta quedar nítido. En la portada (sin sección aún) solo se ve el «···».
 // Abierta: muestra todas las secciones; la píldora se desliza hasta la que señalas y despliega su nombre.
 function SectionIsland({ active, visible }: { active: string; visible: boolean }) {
   const [open, setOpen] = useState(false);
@@ -89,7 +87,7 @@ function SectionIsland({ active, visible }: { active: string; visible: boolean }
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  // Efecto cilindro: el nombre anterior sale girando hacia arriba mientras entra el nuevo.
+  // Cambio de sección: se guarda la anterior un instante para que salga desvaneciéndose mientras entra la nueva.
   useEffect(() => {
     if (lastActive.current === active) return;
     setLeaving(lastActive.current);
@@ -117,10 +115,9 @@ function SectionIsland({ active, visible }: { active: string; visible: boolean }
   }, [isOpen]);
 
   const activeIndex = sectionLinks.findIndex(link => link.id === active);
-  const currentIndex = activeIndex >= 0 ? activeIndex : sectionLinks.length;
   const pillIndex = hovered ?? (activeIndex >= 0 ? activeIndex : null);
   const style = {
-    "--active-label": `${labelWidths[currentIndex] ?? 0}px`,
+    "--active-label": `${activeIndex >= 0 ? labelWidths[activeIndex] ?? 0 : 0}px`,
     "--pill-index": pillIndex ?? 0,
     "--pill-label": `${pillIndex === null ? 0 : labelWidths[pillIndex] ?? 0}px`,
   } as CSSProperties;
@@ -131,21 +128,20 @@ function SectionIsland({ active, visible }: { active: string; visible: boolean }
     // Para quien navega con teclado: el foco pasa a la sección actual dentro del menú abierto.
     requestAnimationFrame(() => linkRefs.current[Math.max(activeIndex, 0)]?.focus({ preventScroll: true }));
   }
-  function closeMenu() { setOpen(false); setHovered(null); requestAnimationFrame(() => toggleRef.current?.focus({ preventScroll: true })); }
-
   function renderCurrent(id: string, state: "enter" | "leave" | "still") {
-    const item = compactItems.find(entry => entry.id === id) ?? menuItem;
-    return <span key={`${state}-${id}`} className={`isla-roll${state === "enter" ? " is-entering" : state === "leave" ? " is-leaving" : ""}`} aria-hidden="true">
+    const item = sectionLinks.find(entry => entry.id === id);
+    if (!item) return null;
+    return <span key={`${state}-${id}`} className={`isla-swap${state === "enter" ? " is-entering" : state === "leave" ? " is-leaving" : ""}`} aria-hidden="true">
       <Icon>{item.icon}</Icon><span className="isla-text">{item.label}</span>
     </span>;
   }
 
-  const currentLabel = (compactItems[currentIndex] ?? menuItem).label;
-  return <nav ref={navRef} className={`isla${visible ? " is-visible" : ""}${isOpen ? " is-open" : ""}${pillIndex !== null ? " has-pill" : ""}`} style={style} aria-label="Navegación de secciones" aria-hidden={!visible} inert={!visible}>
+  const currentLabel = activeIndex >= 0 ? `${sectionLinks[activeIndex].label}. ` : "";
+  return <nav ref={navRef} className={`isla${visible ? " is-visible" : ""}${isOpen ? " is-open" : ""}${activeIndex >= 0 ? " has-current" : ""}${pillIndex !== null ? " has-pill" : ""}`} style={style} aria-label="Navegación de secciones" aria-hidden={!visible} inert={!visible}>
     <span className="isla-measure" aria-hidden="true">
-      {compactItems.map((item, index) => <span key={item.label} className="isla-text" ref={label => { measureRefs.current[index] = label; }}>{item.label}</span>)}
+      {sectionLinks.map((item, index) => <span key={item.id} className="isla-text" ref={label => { measureRefs.current[index] = label; }}>{item.label}</span>)}
     </span>
-    <button ref={toggleRef} type="button" className="isla-compact" aria-expanded={isOpen} aria-controls="isla-secciones" aria-label={`${currentLabel}. Abrir menú de secciones`} inert={isOpen} onClick={openMenu}>
+    <button ref={toggleRef} type="button" className="isla-compact" aria-expanded={isOpen} aria-controls="isla-secciones" aria-label={`${currentLabel}Abrir menú de secciones`} inert={isOpen} onClick={openMenu}>
       <span className="isla-current">
         {leaving !== null && renderCurrent(leaving, "leave")}
         {renderCurrent(active, leaving !== null ? "enter" : "still")}
@@ -161,7 +157,6 @@ function SectionIsland({ active, visible }: { active: string; visible: boolean }
         <Icon>{link.icon}</Icon>
         <span className="isla-label"><span className="isla-text">{link.label}</span></span>
       </a>)}
-      <button type="button" className="isla-close" aria-label="Cerrar menú de secciones" onClick={closeMenu}><Icon><path d="M18 6 6 18" /><path d="m6 6 12 12" /></Icon></button>
     </div>
   </nav>;
 }
