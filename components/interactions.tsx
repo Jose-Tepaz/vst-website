@@ -128,10 +128,10 @@ function SectionIsland({ active, visible }: { active: string; visible: boolean }
     // Para quien navega con teclado: el foco pasa a la sección actual dentro del menú abierto.
     requestAnimationFrame(() => linkRefs.current[Math.max(activeIndex, 0)]?.focus({ preventScroll: true }));
   }
-  function renderCurrent(id: string, state: "enter" | "leave" | "still") {
+  function renderCurrent(id: string, state: "enter" | "first" | "leave" | "still") {
     const item = sectionLinks.find(entry => entry.id === id);
     if (!item) return null;
-    return <span key={`${state}-${id}`} className={`isla-swap${state === "enter" ? " is-entering" : state === "leave" ? " is-leaving" : ""}`} aria-hidden="true">
+    return <span key={`${state === "first" ? "enter" : state}-${id}`} className={`isla-swap${state === "enter" ? " is-entering" : state === "first" ? " is-entering is-first" : state === "leave" ? " is-leaving" : ""}`} aria-hidden="true">
       <Icon>{item.icon}</Icon><span className="isla-text">{item.label}</span>
     </span>;
   }
@@ -144,7 +144,8 @@ function SectionIsland({ active, visible }: { active: string; visible: boolean }
     <button ref={toggleRef} type="button" className="isla-compact" aria-expanded={isOpen} aria-controls="isla-secciones" aria-label={`${currentLabel}Abrir menú de secciones`} inert={isOpen} onClick={openMenu}>
       <span className="isla-current">
         {leaving !== null && renderCurrent(leaving, "leave")}
-        {renderCurrent(active, leaving !== null ? "enter" : "still")}
+        {/* Desde la portada no hay nombre que salga, así que el nuevo entra sin esperar. */}
+        {renderCurrent(active, leaving === null ? "still" : leaving === "" ? "first" : "enter")}
       </span>
       <span className="isla-dots"><Icon><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></Icon></span>
     </button>

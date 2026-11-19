@@ -255,7 +255,7 @@
 .navigation .nav-contact span{margin-left:0}
 .navigation .nav-contact:hover{color:var(--on-blue);transform:translateY(-2px)}
 /* Barra flotante tipo "isla". Cerrada: sección actual (cambia con un fundido desenfocado) y «···»; en la portada, solo «···». Abierta: todas las secciones; la píldora se desliza hasta la señalada y despliega su nombre. */
-.isla{--item:44px;--gap:4px;--pad:6px;--stack:78px;--current:0px;--spring:cubic-bezier(.32,1.2,.5,1);--pill:rgba(11,14,19,.24);--w:calc(2 * var(--pad) + var(--item) + var(--current));--pill-w:calc(var(--item) + var(--pill-label,0px));--step:calc(var(--item) + var(--gap));position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom,0px));z-index:50;display:grid;align-items:center;width:var(--w);max-width:calc(100% - 32px);padding:var(--pad);overflow:hidden;background:var(--blue);border-radius:999px;color:var(--on-blue);box-shadow:0 1px 2px rgba(11,14,19,.18),0 16px 36px -14px rgba(0,58,128,.6),inset 0 0 0 1px rgba(255,255,255,.22);opacity:0;visibility:hidden;pointer-events:none;transform:translate(-50%,24px);transition:opacity .25s,transform .3s,visibility .25s,width .5s var(--spring)}
+.isla{--item:44px;--gap:4px;--pad:6px;--stack:78px;--current:0px;--spring:cubic-bezier(.32,1.2,.5,1);--pill:rgba(11,14,19,.24);--w:calc(2 * var(--pad) + var(--item) + var(--current));--pill-w:calc(var(--item) + var(--pill-label,0px));--step:calc(var(--item) + var(--gap));position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom,0px));z-index:50;display:grid;align-items:center;width:var(--w);max-width:calc(100% - 32px);padding:var(--pad);overflow:hidden;background:var(--blue);border-radius:999px;color:var(--on-blue);contain:layout paint;opacity:0;visibility:hidden;pointer-events:none;transform:translate(-50%,24px);transition:opacity .25s,transform .3s,visibility .25s,width .4s var(--spring)}
 .isla.is-visible{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
 .isla.has-current{--current:calc(var(--item) + var(--active-label,0px) + var(--gap))}
 .isla.is-open{--w:calc(2 * var(--pad) + 4 * var(--item) + 3 * var(--gap) + var(--pill-label,0px))}
@@ -268,13 +268,15 @@
 .isla.is-open .isla-compact{opacity:0;pointer-events:none}
 .isla-panel{position:relative;opacity:0;pointer-events:none}
 .isla.is-open .isla-panel{opacity:1;pointer-events:auto;transition:opacity .25s .08s}
-.isla-current{position:relative;display:block;flex:none;width:calc(var(--item) + var(--active-label,0px));height:var(--item);border-radius:999px;background:var(--pill);overflow:hidden;transition:width .5s var(--spring),margin .5s var(--spring),opacity .2s,transform .3s cubic-bezier(.3,.7,.4,1)}
+.isla-current{position:relative;display:block;flex:none;width:calc(var(--item) + var(--active-label,0px));height:var(--item);border-radius:999px;background:var(--pill);overflow:hidden;transition:width .4s var(--spring),margin .4s var(--spring),opacity .2s,transform .3s cubic-bezier(.3,.7,.4,1)}
 .isla:not(.has-current) .isla-current{width:0;margin-right:calc(-1 * var(--gap));opacity:0}
 .isla-swap{position:absolute;top:0;bottom:0;left:0;display:flex;align-items:center}
 .isla-swap svg{margin-inline:calc((var(--item) - 20px) / 2)}
 .isla-swap svg .f{fill-opacity:.25}
-.isla-swap.is-entering{animation:isla-swap-in .32s cubic-bezier(.2,.7,.2,1) .1s both}
-.isla-swap.is-leaving{animation:isla-swap-out .16s ease-in both}
+.isla-swap.is-entering{animation:isla-swap-in .26s cubic-bezier(.2,.7,.2,1) .06s both}
+.isla-swap.is-entering.is-first{animation-delay:0s}
+.isla-swap.is-entering,.isla-swap.is-leaving{will-change:opacity,filter,transform}
+.isla-swap.is-leaving{animation:isla-swap-out .12s ease-in both}
 @keyframes isla-swap-in{from{opacity:0;filter:blur(4px);transform:translateY(4px)}to{opacity:1;filter:blur(0);transform:none}}
 @keyframes isla-swap-out{from{opacity:1;filter:blur(0)}to{opacity:0;filter:blur(4px)}}
 .isla-dots{display:grid;place-items:center;flex:none;width:var(--item);height:var(--item);border-radius:999px;color:rgba(255,255,255,.9);transition:background-color .2s,color .2s}
