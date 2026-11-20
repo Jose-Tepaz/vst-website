@@ -1,3 +1,5 @@
+import { Arrow } from "@/components/arrow";
+
 const questions = [
   { question: "¿Qué podemos construir juntos?", answer: "Diseñamos experiencias UX/UI y desarrollamos sitios web, web apps y aplicaciones móviles. También integramos y desplegamos agentes de IA, conectamos sistemas y ofrecemos consultoría tecnológica." },
   { question: "¿Necesito tener mi idea completamente definida?", answer: "Podemos empezar con una idea, un problema o una experiencia que quieras mejorar. En la primera etapa conversamos sobre tu negocio y las personas que usarán el producto para definir una dirección y un alcance compartidos." },
@@ -10,7 +12,7 @@ const questions = [
 
 export function Faq() {
   return <section id="preguntas" className="faq-section wrap" aria-labelledby="faq-title">
-    <div className="faq-intro"><h2 id="faq-title">Preguntas <br />frecuentes.</h2><p>Resolvemos algunas preguntas que suelen aparecer al construir un producto digital.</p><a href="#contacto">¿Tienes otra pregunta? Hablemos <span aria-hidden="true">↗</span></a></div>
+    <div className="faq-intro"><h2 id="faq-title">Preguntas <br />frecuentes.</h2><p>Resolvemos algunas preguntas que suelen aparecer al construir un producto digital.</p><a className="cta" href="#contacto">¿Tienes otra pregunta? Hablemos <Arrow /></a></div>
     <div className="faq-list">{questions.map(item => <details className="faq-item" name="studio-faq" key={item.question}><summary>{item.question}<span className="faq-indicator" aria-hidden="true">+</span></summary><p>{item.answer}</p></details>)}</div>
   </section>;
 }

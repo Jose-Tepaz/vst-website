@@ -7,6 +7,7 @@ import { Faq } from "@/components/faq";
 import { Team } from "@/components/team";
 import { ContactFooter } from "@/components/contact-footer";
 import { BuildProcess } from "@/components/build-process";
+import { Arrow } from "@/components/arrow";
 
 function Logo() {
   return <a className="logo" href="#inicio" aria-label="Vástago Studio, inicio"><span className="monogram">VST</span><span className="logotype">Vástago<span>Studio</span></span></a>;
@@ -21,7 +22,7 @@ export default function Home() {
         <div className="hero-content wrap">
         <h1 id="hero-title">Del diseño<br />al despliegue.</h1>
         <div className="hero-bottom">
-          <p>Somos Vástago. Un estudio boutique de diseño y desarrollo de software. Creamos productos digitales, de la primera idea a las personas que lo usan.</p>
+          <p>Somos Vástago. Un estudio boutique de diseño y desarrollo de software. Creamos productos digitales, de la primera idea a las personas que los usan.</p>
         </div>
         </div>
         <PhraseRibbon />
@@ -42,7 +43,7 @@ export default function Home() {
 
       <section id="estudio" className="studio studio-reframed wrap" aria-labelledby="studio-title">
         <div className="studio-presentation">
-          <div className="studio-introduction"><h2 id="studio-title" data-reveal>Tu visión.<br />Nuestro compromiso.</h2><p data-reveal>Tú sabes qué quieres lograr y a quién quieres llegar. Nosotros nos involucramos para construir un producto digital que tenga sentido para quienes lo usan. Nos comprometemos a acompañarte en cada decisión de diseño y tecnología desde la primera conversación.</p><a href="#contacto" data-reveal>Conozcamos tu proyecto <span aria-hidden="true">↗</span></a></div>
+          <div className="studio-introduction"><h2 id="studio-title" data-reveal>Tu visión.<br />Nuestro compromiso.</h2><p data-reveal>Tú sabes qué quieres lograr y a quién quieres llegar. Nosotros nos involucramos para construir un producto digital que tenga sentido para quienes lo usan. Nos comprometemos a acompañarte en cada decisión de diseño y tecnología desde la primera conversación.</p><a className="cta" href="#contacto" data-reveal>Conozcamos tu proyecto <Arrow /></a></div>
           <div className="studio-tenure" data-reveal><strong>4</strong><p>años conectando<br />diseño y desarrollo.</p><span>De la primera idea al despliegue.</span></div>
         </div>
         <div className="studio-principles"><article data-reveal><h3>Cerca de tu equipo.</h3><p>Conversamos contigo, entendemos el contexto y compartimos las decisiones. Tu conocimiento del negocio forma parte del proyecto desde el inicio.</p></article><article data-reveal><h3>De principio a fin.</h3><p>Diseñamos pensando en cómo se construye y desarrollamos cuidando la experiencia. Un mismo equipo acompaña el producto hasta su despliegue.</p></article></div>
