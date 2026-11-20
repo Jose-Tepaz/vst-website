@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { PhraseRibbon } from "@/components/phrase-ribbon";
+import { Arrow } from "@/components/arrow";
 import { useEffect, useRef, useState, type PointerEvent, type CSSProperties } from "react";
 
 const portraitSlots = ["Retrato 01", "Retrato 02", "Retrato 03", "Retrato 04", "Retrato 05"];
@@ -82,7 +83,7 @@ export function Team() {
       </div>
       <div className="team-slider-controls">
         <span className="team-slide-count" aria-label={`Perfil ${active + 1} de ${portraitSlots.length}`}>{String(active + 1).padStart(2, "0")} <span>/ 05</span></span>
-        <div><button type="button" onClick={() => move(-1)} aria-label="Perfil anterior">←</button><button className="team-pause" type="button" onClick={() => setPaused(value => !value)} aria-pressed={paused}>{paused ? "Reanudar" : "Pausar"}</button><button type="button" onClick={() => move(1)} aria-label="Siguiente perfil">→</button></div>
+        <div><button type="button" onClick={() => move(-1)} aria-label="Perfil anterior"><Arrow direction="left" /></button><button className="team-pause" type="button" onClick={() => setPaused(value => !value)} aria-pressed={paused}>{paused ? "Reanudar" : "Pausar"}</button><button type="button" onClick={() => move(1)} aria-label="Siguiente perfil"><Arrow direction="right" /></button></div>
       </div>
     </div>
   </section>;

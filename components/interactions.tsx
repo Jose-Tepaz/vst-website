@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
-import { contactHref, services } from "@/lib/content";
+import { contactHref, services, studio } from "@/lib/content";
+import { Arrow } from "@/components/arrow";
 
 export function Menu({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -38,12 +39,12 @@ export function Menu({ children }: { children: ReactNode }) {
   return <>
     <div className="header-space"><header className={`header scroll-header${showTop ? " is-visible" : ""}`} aria-hidden={!showTop} inert={!showTop}>
     {children}
-    <button className="menu-toggle" aria-expanded={open} aria-controls="navigation" onClick={() => setOpen(!open)}>{open ? "Cerrar" : "Menú"}</button>
+    <button className="menu-toggle cta" aria-expanded={open} aria-controls="navigation" onClick={() => setOpen(!open)}>{open ? "Cerrar" : "Menú"}</button>
     <nav id="navigation" className={open ? "navigation is-open" : "navigation"} aria-label="Principal">
-      <a href="#proyectos" onClick={() => setOpen(false)}>Proyectos</a>
-      <a href="#servicios" onClick={() => setOpen(false)}>Servicios</a>
-      <a href="#estudio" onClick={() => setOpen(false)}>Estudio</a>
-      <a className="nav-contact" href="#contacto" onClick={() => setOpen(false)}>Hablemos <span aria-hidden="true">↗</span></a>
+      <a className="cta" href="#proyectos" onClick={() => setOpen(false)}>Proyectos</a>
+      <a className="cta" href="#servicios" onClick={() => setOpen(false)}>Servicios</a>
+      <a className="cta" href="#estudio" onClick={() => setOpen(false)}>Estudio</a>
+      <a className="nav-contact cta" href="#contacto" onClick={() => setOpen(false)}>Hablemos <Arrow /></a>
     </nav>
     </header></div>
     <nav className={`bottom-navigation${showBottom ? " is-visible" : ""}`}  aria-label="Navegación de secciones" aria-hidden={!showBottom} inert={!showBottom}>
@@ -58,10 +59,10 @@ export function ProjectBrief() {
   return <div className="brief">
     <p>Quiero construir…</p>
     <div className="brief-options" aria-label="Selecciona los servicios para tu proyecto">
-      {services.map(service => <button key={service.name} type="button" aria-pressed={selected.includes(service.short)} onClick={() => toggle(service.short)}>{service.short}<span aria-hidden="true">{selected.includes(service.short) ? "✓" : "+"}</span></button>)}
+      {services.map(service => <button key={service.name} type="button" className="cta" aria-pressed={selected.includes(service.short)} onClick={() => toggle(service.short)}>{service.short}<span className="brief-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">{selected.includes(service.short) ? <path d="M5 12.5 10 17.5 19 7" /> : <path d="M12 5v14M5 12h14" />}</svg></span></button>)}
     </div>
-    <a className="button contact-button" href={contactHref(selected.length ? selected.join(" y ") : undefined)}>Hablemos de tu proyecto <span aria-hidden="true">↗</span></a>
-    <p className="contact-note">Se abrirá tu aplicación de correo con la idea que elegiste.</p>
+    <a className="button contact-button cta" href={contactHref(selected.length ? selected.join(" y ") : undefined)}>Hablemos de tu proyecto <Arrow /></a>
+    <p className="contact-note">Elige uno o varios. Se abrirá tu correo con el mensaje listo. Si no, escribe a {studio.email}.</p>
   </div>;
 }
 
