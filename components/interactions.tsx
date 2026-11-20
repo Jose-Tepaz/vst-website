@@ -1,14 +1,26 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { contactHref, services, studio } from "@/lib/content";
 import { Arrow } from "@/components/arrow";
+
+// Iconos de Lucide (licencia ISC): layout-grid, sparkles, users, message-circle y ellipsis.
+// Las formas con clase "f" se rellenan suavemente cuando la sección está activa.
+const sectionLinks = [
+  { id: "proyectos", label: "Proyectos", icon: <><rect className="f" x="3" y="3" width="7" height="7" rx="1" /><rect className="f" x="14" y="3" width="7" height="7" rx="1" /><rect className="f" x="14" y="14" width="7" height="7" rx="1" /><rect className="f" x="3" y="14" width="7" height="7" rx="1" /></> },
+  { id: "servicios", label: "Servicios", icon: <><path className="f" d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" /><path d="M20 3v4" /><path d="M22 5h-4" /><path d="M4 17v2" /><path d="M5 18H3" /></> },
+  { id: "estudio", label: "Estudio", icon: <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle className="f" cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></> },
+  { id: "contacto", label: "Hablemos", icon: <path className="f" d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /> },
+];
+
+function Icon({ children }: { children: ReactNode }) {
+  return <svg viewBox="0 0 24 24" aria-hidden="true">{children}</svg>;
+}
 
 export function Menu({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
-  const links = [{ id: "proyectos", label: "Proyectos" }, { id: "servicios", label: "Servicios" }, { id: "estudio", label: "Estudio" }, { id: "contacto", label: "Hablemos" }];
   useEffect(() => {
     function close(event: KeyboardEvent) { if (event.key === "Escape") setOpen(false); }
     window.addEventListener("keydown", close);
@@ -35,7 +47,6 @@ export function Menu({ children }: { children: ReactNode }) {
     return () => { cancelAnimationFrame(frame); window.removeEventListener("scroll", schedule); window.removeEventListener("resize", schedule); };
   }, []);
   const showTop = !scrolled;
-  const showBottom = scrolled;
   return <>
     <div className="header-space"><header className={`header scroll-header${showTop ? " is-visible" : ""}`} aria-hidden={!showTop} inert={!showTop}>
     {children}
@@ -47,10 +58,109 @@ export function Menu({ children }: { children: ReactNode }) {
       <a className="nav-contact cta" href="#contacto" onClick={() => setOpen(false)}>Hablemos <Arrow /></a>
     </nav>
     </header></div>
-    <nav className={`bottom-navigation${showBottom ? " is-visible" : ""}`}  aria-label="Navegación de secciones" aria-hidden={!showBottom} inert={!showBottom}>
-      {links.map(link => <a key={link.id} href={`#${link.id}`} aria-current={active === link.id ? "location" : undefined}>{link.label}</a>)}
-    </nav>
+    <SectionIsland active={active} visible={scrolled} />
   </>;
+}
+
+// Barra flotante tipo "isla".
+// Cerrada: muestra la sección actual y el botón «···»; al cambiar de sección, el nombre anterior se desvanece
+// y el nuevo entra desenfocado hasta quedar nítido. En la portada (sin sección aún) solo se ve el «···».
+// Abierta: muestra todas las secciones; la píldora se desliza hasta la que señalas y despliega su nombre.
+function SectionIsland({ active, visible }: { active: string; visible: boolean }) {
+  const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState<number | null>(null);
+  const [leaving, setLeaving] = useState<string | null>(null);
+  const [labelWidths, setLabelWidths] = useState<number[]>([]);
+  const navRef = useRef<HTMLElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const measureRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const lastActive = useRef(active);
+  const openedAt = useRef(0);
+  const isOpen = open && visible;
+
+  // Ancho real de cada nombre: la píldora y la barra se animan hasta esa medida exacta.
+  useEffect(() => {
+    function measure() { setLabelWidths(measureRefs.current.map(label => label?.offsetWidth ?? 0)); }
+    measure();
+    document.fonts.ready.then(measure);
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  // Cambio de sección: se guarda la anterior un instante para que salga desvaneciéndose mientras entra la nueva.
+  useEffect(() => {
+    if (lastActive.current === active) return;
+    setLeaving(lastActive.current);
+    lastActive.current = active;
+    const timer = window.setTimeout(() => setLeaving(null), 450);
+    return () => window.clearTimeout(timer);
+  }, [active]);
+
+  // Se cierra con Esc, al tocar fuera o al seguir haciendo scroll.
+  useEffect(() => {
+    if (!isOpen) return;
+    openedAt.current = window.scrollY;
+    function onKey(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      // El botón deja de estar inactivo tras el siguiente pintado; entonces recibe el foco.
+      if (navRef.current?.contains(document.activeElement)) requestAnimationFrame(() => toggleRef.current?.focus({ preventScroll: true }));
+    }
+    function onPointer(event: PointerEvent) { if (!navRef.current?.contains(event.target as Node)) setOpen(false); }
+    function onScroll() { if (Math.abs(window.scrollY - openedAt.current) > 40) setOpen(false); }
+    window.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onPointer);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { window.removeEventListener("keydown", onKey); document.removeEventListener("pointerdown", onPointer); window.removeEventListener("scroll", onScroll); };
+  }, [isOpen]);
+
+  const activeIndex = sectionLinks.findIndex(link => link.id === active);
+  const pillIndex = hovered ?? (activeIndex >= 0 ? activeIndex : null);
+  const style = {
+    "--active-label": `${activeIndex >= 0 ? labelWidths[activeIndex] ?? 0 : 0}px`,
+    "--pill-index": pillIndex ?? 0,
+    "--pill-label": `${pillIndex === null ? 0 : labelWidths[pillIndex] ?? 0}px`,
+  } as CSSProperties;
+
+  function openMenu() {
+    setOpen(true);
+    setHovered(null);
+    // Para quien navega con teclado: el foco pasa a la sección actual dentro del menú abierto.
+    requestAnimationFrame(() => linkRefs.current[Math.max(activeIndex, 0)]?.focus({ preventScroll: true }));
+  }
+  function renderCurrent(id: string, state: "enter" | "first" | "leave" | "still") {
+    const item = sectionLinks.find(entry => entry.id === id);
+    if (!item) return null;
+    return <span key={`${state === "first" ? "enter" : state}-${id}`} className={`isla-swap${state === "enter" ? " is-entering" : state === "first" ? " is-entering is-first" : state === "leave" ? " is-leaving" : ""}`} aria-hidden="true">
+      <Icon>{item.icon}</Icon><span className="isla-text">{item.label}</span>
+    </span>;
+  }
+
+  const currentLabel = activeIndex >= 0 ? `${sectionLinks[activeIndex].label}. ` : "";
+  return <nav ref={navRef} className={`isla${visible ? " is-visible" : ""}${isOpen ? " is-open" : ""}${activeIndex >= 0 ? " has-current" : ""}${pillIndex !== null ? " has-pill" : ""}`} style={style} aria-label="Navegación de secciones" aria-hidden={!visible} inert={!visible}>
+    <span className="isla-measure" aria-hidden="true">
+      {sectionLinks.map((item, index) => <span key={item.id} className="isla-text" ref={label => { measureRefs.current[index] = label; }}>{item.label}</span>)}
+    </span>
+    <button ref={toggleRef} type="button" className="isla-compact" aria-expanded={isOpen} aria-controls="isla-secciones" aria-label={`${currentLabel}Abrir menú de secciones`} inert={isOpen} onClick={openMenu}>
+      <span className="isla-current">
+        {leaving !== null && renderCurrent(leaving, "leave")}
+        {/* Desde la portada no hay nombre que salga, así que el nuevo entra sin esperar. */}
+        {renderCurrent(active, leaving === null ? "still" : leaving === "" ? "first" : "enter")}
+      </span>
+      <span className="isla-dots"><Icon><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></Icon></span>
+    </button>
+    <div id="isla-secciones" className="isla-panel" inert={!isOpen} onPointerLeave={() => setHovered(null)}
+      onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setHovered(null); }}>
+      {sectionLinks.map((link, index) => <a key={link.id} ref={anchor => { linkRefs.current[index] = anchor; }} href={`#${link.id}`}
+        aria-current={active === link.id ? "location" : undefined} data-expanded={pillIndex === index ? "" : undefined}
+        style={{ "--label": `${labelWidths[index] ?? 0}px` } as CSSProperties}
+        onPointerEnter={() => setHovered(index)} onFocus={() => setHovered(index)} onClick={() => { setOpen(false); setHovered(null); }}>
+        <Icon>{link.icon}</Icon>
+        <span className="isla-label"><span className="isla-text">{link.label}</span></span>
+      </a>)}
+    </div>
+  </nav>;
 }
 
 export function ProjectBrief() {
