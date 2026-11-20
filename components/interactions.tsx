@@ -66,12 +66,24 @@ export function ProjectBrief() {
   </div>;
 }
 
+// Entrada de las secciones: cada bloque aparece una vez al llegar a la vista.
+// Si la página abre a mitad de camino (recarga con scroll restaurado o enlace con #), lo que ya está a la vista
+// aparece de una vez, sin animar; y el salto al # es inmediato, no un deslizamiento por toda la página.
 export function Motion() {
   useEffect(() => {
+    const root = document.documentElement;
+    const hash = decodeURIComponent(window.location.hash.slice(1));
+    const target = hash ? document.getElementById(hash) : null;
+    if (target) { root.style.scrollBehavior = "auto"; target.scrollIntoView(); root.style.scrollBehavior = ""; }
+    const arrivedMidPage = window.scrollY > 8;
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
       if (entry.isIntersecting) { entry.target.classList.add("in-view"); observer.unobserve(entry.target); }
     }), { threshold: 0.12 });
-    document.querySelectorAll("[data-reveal]").forEach(element => observer.observe(element));
+    document.querySelectorAll("[data-reveal]").forEach(element => {
+      const box = element.getBoundingClientRect();
+      if (arrivedMidPage && box.top < window.innerHeight && box.bottom > 0) element.classList.add("in-view", "seen");
+      else observer.observe(element);
+    });
     return () => observer.disconnect();
   }, []);
   return null;

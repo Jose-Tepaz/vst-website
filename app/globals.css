@@ -566,3 +566,5 @@
    así no gastan tiempo al cargar la página y su entrada se ve cuando la persona llega. */
 .svc-panels:not(.in-view) .piece,.svc-panels:not(.in-view) .wc-link,.svc-panels:not(.in-view) .svc-copy{animation:none}
 .svc-panels:not(.in-view) .piece{opacity:0}
+/* Lo que ya está a la vista al abrir la página a mitad de camino aparece sin animar */
+[data-reveal].seen{animation:none}
