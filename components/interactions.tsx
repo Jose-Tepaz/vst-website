@@ -166,7 +166,7 @@ function SectionIsland({ active, visible }: { active: string; visible: boolean }
 export function ProjectBrief() {
   const [selected, setSelected] = useState<string[]>([]);
   function toggle(name: string) { setSelected(previous => previous.includes(name) ? previous.filter(item => item !== name) : [...previous, name]); }
-  return <div className="brief">
+  return <div className="brief" data-reveal>
     <p>Quiero construir…</p>
     <div className="brief-options" aria-label="Selecciona los servicios para tu proyecto">
       {services.map(service => <button key={service.name} type="button" className="cta" aria-pressed={selected.includes(service.short)} onClick={() => toggle(service.short)}>{service.short}<span className="brief-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">{selected.includes(service.short) ? <path d="M5 12.5 10 17.5 19 7" /> : <path d="M12 5v14M5 12h14" />}</svg></span></button>)}
@@ -176,12 +176,24 @@ export function ProjectBrief() {
   </div>;
 }
 
+// Entrada de las secciones: cada bloque aparece una vez al llegar a la vista.
+// Si la página abre a mitad de camino (recarga con scroll restaurado o enlace con #), lo que ya está a la vista
+// aparece de una vez, sin animar; y el salto al # es inmediato, no un deslizamiento por toda la página.
 export function Motion() {
   useEffect(() => {
+    const root = document.documentElement;
+    const hash = decodeURIComponent(window.location.hash.slice(1));
+    const target = hash ? document.getElementById(hash) : null;
+    if (target) { root.style.scrollBehavior = "auto"; target.scrollIntoView(); root.style.scrollBehavior = ""; }
+    const arrivedMidPage = window.scrollY > 8;
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
       if (entry.isIntersecting) { entry.target.classList.add("in-view"); observer.unobserve(entry.target); }
     }), { threshold: 0.12 });
-    document.querySelectorAll("[data-reveal]").forEach(element => observer.observe(element));
+    document.querySelectorAll("[data-reveal]").forEach(element => {
+      const box = element.getBoundingClientRect();
+      if (arrivedMidPage && box.top < window.innerHeight && box.bottom > 0) element.classList.add("in-view", "seen");
+      else observer.observe(element);
+    });
     return () => observer.disconnect();
   }, []);
   return null;

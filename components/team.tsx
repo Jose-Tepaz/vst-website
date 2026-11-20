@@ -61,11 +61,11 @@ export function Team() {
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
   }
   return <section ref={section} id="equipo" className="team-section team-slider wrap" aria-labelledby="team-title">
-    <div className="team-heading">
+    <div className="team-heading" data-reveal>
       <h2 id="team-title">Las personas<br />detrás de Vástago.</h2>
       <p>Diseñamos, desarrollamos y construimos contigo. Conoce al equipo que acompaña tu proyecto de principio a fin.</p>
     </div>
-    <div className="team-carousel" role="region" aria-roledescription="carrusel" aria-label="Equipo de Vástago"
+    <div className="team-carousel" data-reveal role="region" aria-roledescription="carrusel" aria-label="Equipo de Vástago"
       onMouseEnter={() => setEngaged(true)} onMouseLeave={() => setEngaged(false)}
       onFocusCapture={() => setEngaged(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setEngaged(false); }}
       onKeyDown={event => { if (event.key === "ArrowRight" || event.key === "ArrowLeft") { event.preventDefault(); move(event.key === "ArrowRight" ? 1 : -1); } }}>
