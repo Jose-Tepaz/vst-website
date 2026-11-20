@@ -286,7 +286,7 @@
 .contact-footer .brief{margin-top:10px}
 .contact-footer .brief>p:first-child{font-size:18px}
 .contact-footer .brief-options{gap:10px;margin:20px 0 25px}
-.contact-footer .brief-options button{min-width:0;padding:15px 18px;gap:20px;background:transparent;color:var(--on-blue);border:1px solid var(--on-blue);font-size:14px;min-height:48px}
+.contact-footer .brief-options button{min-width:0;align-items:center;padding:15px 18px;gap:20px;background:transparent;color:var(--on-blue);border:1px solid var(--on-blue);font-size:14px;min-height:48px}
 .contact-footer .brief-options button:hover,.contact-footer .brief-options button[aria-pressed=true]{background:var(--on-blue);color:var(--ink)}
 .contact-footer .contact-button{background:var(--on-blue);color:var(--ink);min-width:0;width:100%;padding:20px 22px}
 .contact-footer .contact-button:hover{background:var(--paper)}
@@ -701,7 +701,6 @@
 .method-nav a+a::before{content:"";position:absolute;left:0;top:50%;width:1px;height:22px;transform:translateY(-50%);background:rgba(247,248,250,.16)}
 @media(hover:hover){.method-nav a:hover span{transform:translateY(-2px)}}
 @media(max-width:650px){.method-nav a::before{display:none}}
-@media(min-width:651px) and (max-width:1000px){.contact-footer .brief-options{justify-content:center}}
 .project-photo img{transition:transform .7s cubic-bezier(.4,0,.2,1)}
 @media(hover:hover){.project:hover .project-photo img{transform:scale(1.03)}}
 @media(prefers-reduced-motion:reduce){.project:hover .project-photo img{transform:none}}
