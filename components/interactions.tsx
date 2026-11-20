@@ -56,7 +56,7 @@ export function Menu({ children }: { children: ReactNode }) {
 export function ProjectBrief() {
   const [selected, setSelected] = useState<string[]>([]);
   function toggle(name: string) { setSelected(previous => previous.includes(name) ? previous.filter(item => item !== name) : [...previous, name]); }
-  return <div className="brief">
+  return <div className="brief" data-reveal>
     <p>Quiero construir…</p>
     <div className="brief-options" aria-label="Selecciona los servicios para tu proyecto">
       {services.map(service => <button key={service.name} type="button" className="cta" aria-pressed={selected.includes(service.short)} onClick={() => toggle(service.short)}>{service.short}<span className="brief-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">{selected.includes(service.short) ? <path d="M5 12.5 10 17.5 19 7" /> : <path d="M12 5v14M5 12h14" />}</svg></span></button>)}

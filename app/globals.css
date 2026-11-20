@@ -555,3 +555,5 @@
 .project-photo img{transition:transform .7s cubic-bezier(.4,0,.2,1)}
 @media(hover:hover){.project:hover .project-photo img{transform:scale(1.03)}}
 @media(prefers-reduced-motion:reduce){.project:hover .project-photo img{transform:none}}
+/* Entrada de las secciones finales: aparecen una sola vez, sin dejar transformaciones al terminar */
+.method-intro[data-reveal].in-view,.method-bottom[data-reveal].in-view,.method-nav[data-reveal].in-view,.method-card-top[data-reveal].in-view,.method-card-body[data-reveal].in-view,.method-card-bottom[data-reveal].in-view,.team-heading[data-reveal].in-view,.team-carousel[data-reveal].in-view,.faq-intro[data-reveal].in-view,.faq-item[data-reveal].in-view,.contact-footer-intro[data-reveal].in-view,.brief[data-reveal].in-view,.contact-footer-signature[data-reveal].in-view{animation-fill-mode:backwards}
