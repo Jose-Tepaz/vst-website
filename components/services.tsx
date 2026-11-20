@@ -23,7 +23,7 @@ export function Services() {
   }
 
   return <section id="servicios" className="services services-scroll" aria-labelledby="services-title"><div className="wrap svc">
-    <div className="svc-rail">
+    <div className="svc-rail" data-reveal>
       <h2 id="services-title">Lo que <br />hacemos.</h2>
       <p>Diseño y desarrollo. <br />Un mismo equipo.</p>
       <div className="svc-tabs" role="tablist" aria-label="Nuestros servicios" onKeyDown={onKeyDown}>
@@ -45,7 +45,7 @@ export function Services() {
         </button>)}
       </div>
     </div>
-    <div className="svc-panels">
+    <div className="svc-panels" data-reveal>
       {services.map((service, index) => <div
         key={service.name}
         role="tabpanel"

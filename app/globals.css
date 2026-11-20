@@ -556,4 +556,13 @@
 @media(hover:hover){.project:hover .project-photo img{transform:scale(1.03)}}
 @media(prefers-reduced-motion:reduce){.project:hover .project-photo img{transform:none}}
 /* Entrada de las secciones finales: aparecen una sola vez, sin dejar transformaciones al terminar */
-.method-intro[data-reveal].in-view,.method-bottom[data-reveal].in-view,.method-nav[data-reveal].in-view,.method-card-top[data-reveal].in-view,.method-card-body[data-reveal].in-view,.method-card-bottom[data-reveal].in-view,.team-heading[data-reveal].in-view,.team-carousel[data-reveal].in-view,.faq-intro[data-reveal].in-view,.faq-item[data-reveal].in-view,.contact-footer-intro[data-reveal].in-view,.brief[data-reveal].in-view,.contact-footer-signature[data-reveal].in-view{animation-fill-mode:backwards}
+.method-intro[data-reveal].in-view,.method-bottom[data-reveal].in-view,.svc-rail[data-reveal].in-view,.svc-panels[data-reveal].in-view,.team-heading[data-reveal].in-view,.team-carousel[data-reveal].in-view,.faq-intro[data-reveal].in-view,.faq-item[data-reveal].in-view,.contact-footer-intro[data-reveal].in-view,.brief[data-reveal].in-view,.contact-footer-signature[data-reveal].in-view{animation-fill-mode:backwards}
+/* Preguntas frecuentes: cada pregunta entra por separado, en cascada */
+.faq-item[data-reveal].in-view{animation-delay:calc(var(--i,0)*.08s + .1s)}
+/* Lo que hacemos: el texto del servicio entra cada vez que se elige uno */
+@keyframes svc-swap{from{opacity:.4;transform:translateY(20px)}to{opacity:1;transform:none}}
+.svc-panel:not([hidden]) .svc-copy{animation:svc-swap .5s cubic-bezier(.16,1,.3,1) both}
+/* Las piezas de los mockups y el texto de cada servicio no se animan hasta que la sección entra en pantalla:
+   así no gastan tiempo al cargar la página y su entrada se ve cuando la persona llega. */
+.svc-panels:not(.in-view) .piece,.svc-panels:not(.in-view) .wc-link,.svc-panels:not(.in-view) .svc-copy{animation:none}
+.svc-panels:not(.in-view) .piece{opacity:0}

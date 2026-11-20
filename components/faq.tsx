@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { Arrow } from "@/components/arrow";
 
 const questions = [
@@ -13,6 +14,6 @@ const questions = [
 export function Faq() {
   return <section id="preguntas" className="faq-section wrap" aria-labelledby="faq-title">
     <div className="faq-intro" data-reveal><h2 id="faq-title">Preguntas <br />frecuentes.</h2><p>Resolvemos algunas preguntas que suelen aparecer al construir un producto digital.</p><a className="cta" href="#contacto">¿Tienes otra pregunta? Hablemos <Arrow /></a></div>
-    <div className="faq-list">{questions.map(item => <details className="faq-item" data-reveal name="studio-faq" key={item.question}><summary>{item.question}<span className="faq-indicator" aria-hidden="true">+</span></summary><p>{item.answer}</p></details>)}</div>
+    <div className="faq-list">{questions.map((item, index) => <details className="faq-item" data-reveal style={{ "--i": index } as CSSProperties} name="studio-faq" key={item.question}><summary>{item.question}<span className="faq-indicator" aria-hidden="true">+</span></summary><p>{item.answer}</p></details>)}</div>
   </section>;
 }
