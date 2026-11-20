@@ -24,8 +24,8 @@ export function Services() {
 
   return <section id="servicios" className="services services-scroll" aria-labelledby="services-title"><div className="wrap svc">
     <div className="svc-rail">
-      <h2 id="services-title">Lo que<br />hacemos.</h2>
-      <p>Diseño y desarrollo.<br />Un mismo equipo.</p>
+      <h2 id="services-title">Lo que <br />hacemos.</h2>
+      <p>Diseño y desarrollo. <br />Un mismo equipo.</p>
       <div className="svc-tabs" role="tablist" aria-label="Nuestros servicios" onKeyDown={onKeyDown}>
         {services.map((service, index) => <button
           key={service.name}
