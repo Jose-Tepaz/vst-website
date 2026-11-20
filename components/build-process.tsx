@@ -39,7 +39,7 @@ export function BuildProcess() {
       <div className="method-intro"><p>Una conversación continua.<br />Decisiones compartidas en cada etapa.</p><p>Del primer intercambio al despliegue, un mismo equipo cuida el diseño y la tecnología.</p></div>
       <h2 id="process-title" data-reveal>Así lo construimos.</h2>
       <div className="method-bottom"><p>Cuatro etapas. Una misma dirección.</p><a className="cta" href="#etapa-entender">Explora el proceso <Arrow direction="down" /></a></div>
-      <nav className="method-nav" aria-label="Etapas del proyecto">{stages.map(stage => <a key={stage.title} href={`#etapa-${stage.title.toLowerCase()}`}>{stage.title}</a>)}</nav>
+      <nav className="method-nav" aria-label="Etapas del proyecto">{stages.map(stage => <a key={stage.title} href={`#etapa-${stage.title.toLowerCase()}`}><span>{stage.title}</span></a>)}</nav>
     </div>
     <div className="method-stack">{stages.map((stage, index) => <article id={`etapa-${stage.title.toLowerCase()}`} className={`method-card method-card-${index}`} key={stage.title} aria-labelledby={`method-title-${index}`}>
       <div className="method-card-surface">
