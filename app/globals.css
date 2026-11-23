@@ -602,3 +602,5 @@
 .svc-panels:not(.in-view) .piece{opacity:0}
 /* Lo que ya está a la vista al abrir la página a mitad de camino aparece sin animar */
 [data-reveal].seen{animation:none}
+/* Sin el recuadro de color que el navegador del teléfono pinta al tocar enlaces, botones y preguntas */
+html{-webkit-tap-highlight-color:transparent}
