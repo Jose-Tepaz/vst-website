@@ -5,7 +5,7 @@ export const studio = {
 
 export const projects = [
   { name: "Eppigo", cover: "eppigo", word: "Eppigo", sub: "", mark: "e", image: "eppigo-4.png", description: "Marketplace de seguros para cotizar, comparar y contratar pólizas en línea en Estados Unidos, en pocos pasos." },
-  { name: "Winkelman", cover: "winkelman", word: "Winkelman", sub: "", mark: "W", image: "winkelman-1.png", description: "Sitio web renovado para presentar con claridad los servicios de ingeniería civil y topografía de Winkelman y facilitar el contacto con sus clientes en Estados Unidos." },
+  { name: "Winkelman", cover: "winkelman", word: "Winkelman", sub: "", mark: "W", image: "winkelman-1.png", description: "Sitio web renovado para presentar con claridad sus servicios de ingeniería civil y topografía y facilitar el contacto con sus clientes en Estados Unidos." },
   {
     name: "GoAMS",
     cover: "goams",

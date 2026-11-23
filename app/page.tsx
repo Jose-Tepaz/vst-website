@@ -13,6 +13,10 @@ function Logo() {
   return <a className="logo" href="#inicio" aria-label="Vástago Studio, inicio"><span className="monogram">VST</span><span className="logotype">Vástago<span>Studio</span></span></a>;
 }
 
+// Vástago lleva más de 4 años en 2026: se cuenta desde 2022 para que la cifra no se quede vieja.
+// Se calcula al construir el sitio, así que sube sola con cada publicación.
+const yearsActive = new Date().getFullYear() - 2022;
+
 export default function Home() {
   return <>
     <a className="skip-link" href="#contenido">Ir al contenido</a>
@@ -44,7 +48,7 @@ export default function Home() {
       <section id="estudio" className="studio studio-reframed wrap" aria-labelledby="studio-title">
         <div className="studio-presentation">
           <div className="studio-introduction"><h2 id="studio-title" data-reveal>Tu visión.<br />Nuestro compromiso.</h2><p data-reveal>Tú sabes qué quieres lograr y a quién quieres llegar. Nosotros nos involucramos para construir un producto digital que tenga sentido para quienes lo usan. Nos comprometemos a acompañarte en cada decisión de diseño y tecnología desde la primera conversación.</p><a className="cta" href="#contacto" data-reveal>Conozcamos tu proyecto <Arrow /></a></div>
-          <div className="studio-tenure" data-reveal><strong>4</strong><p>años conectando<br />diseño y desarrollo.</p><span>De la primera idea al despliegue.</span></div>
+          <div className="studio-tenure" data-reveal><strong>+{yearsActive}</strong><p>años conectando<br />diseño y desarrollo.</p><span>De la primera idea al despliegue.</span></div>
         </div>
         <div className="studio-principles"><article data-reveal><h3>Cerca de tu equipo.</h3><p>Conversamos contigo, entendemos el contexto y compartimos las decisiones. Tu conocimiento del negocio forma parte del proyecto desde el inicio.</p></article><article data-reveal><h3>De principio a fin.</h3><p>Diseñamos pensando en cómo se construye y desarrollamos cuidando la experiencia. Un mismo equipo acompaña el producto hasta su despliegue.</p></article></div>
       </section>

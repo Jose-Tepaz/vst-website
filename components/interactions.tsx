@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { contactHref, services, studio } from "@/lib/content";
+import { contactHref, services } from "@/lib/content";
 import { Arrow } from "@/components/arrow";
 
 // Iconos de Lucide (licencia ISC): layout-grid, sparkles, users, message-circle y ellipsis.
@@ -172,7 +172,7 @@ export function ProjectBrief() {
       {services.map(service => <button key={service.name} type="button" className="cta" aria-pressed={selected.includes(service.short)} onClick={() => toggle(service.short)}>{service.short}<span className="brief-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">{selected.includes(service.short) ? <path d="M5 12.5 10 17.5 19 7" /> : <path d="M12 5v14M5 12h14" />}</svg></span></button>)}
     </div>
     <a className="button contact-button cta" href={contactHref(selected.length ? selected.join(" y ") : undefined)}>Hablemos de tu proyecto <Arrow /></a>
-    <p className="contact-note">Elige uno o varios. Se abrirá tu correo con el mensaje listo. Si no, escribe a {studio.email}.</p>
+    <p className="contact-note">Elige uno o varios y se abrirá tu correo con el mensaje listo.</p>
   </div>;
 }
 

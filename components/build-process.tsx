@@ -7,7 +7,7 @@ const stages = [
   { title: "Entender", phase: "El punto de partida", description: "Conversamos sobre tu negocio, las personas y el problema. Definimos qué construir y por qué.", result: "Una dirección compartida.", detail: "Negocio · Personas · Alcance" },
   { title: "Diseñar", phase: "De la idea a la experiencia", description: "Diseñamos los flujos y la experiencia visual. Probamos la dirección antes de desarrollar.", result: "Una experiencia que puedes probar.", detail: "UX/UI · Flujos · Prototipos" },
   { title: "Desarrollar", phase: "Del diseño al código", description: "Convertimos el diseño en software e integramos las herramientas que el proyecto necesita.", result: "Un producto construido y probado.", detail: "Desarrollo · Integración · Pruebas" },
-  { title: "Desplegar", phase: "Listo para salir", description: "Hacemos el despliegue: publicamos tu producto para que empiece a usarse. Revisamos que todo funcione y acordamos cómo acompañar lo que sigue.", result: "Tu producto, listo para usarse.", detail: "Despliegue · Revisión · Acompañamiento" },
+  { title: "Desplegar", phase: "Listo para salir", description: "Publicamos tu producto para que empiece a usarse. Revisamos que todo funcione y acordamos cómo acompañar lo que sigue.", result: "Tu producto, listo para usarse.", detail: "Despliegue · Revisión · Acompañamiento" },
 ];
 
 export function BuildProcess() {
@@ -36,7 +36,7 @@ export function BuildProcess() {
 
   return <section id="proceso" className="method" aria-labelledby="process-title" ref={sectionRef}>
     <div className="method-head wrap">
-      <div className="method-intro" data-reveal><p>Una conversación continua.<br />Decisiones compartidas en cada etapa.</p><p>Del primer intercambio al despliegue, un mismo equipo cuida el diseño y la tecnología.</p></div>
+      <div className="method-intro" data-reveal><p>Una conversación continua.<br />Decisiones compartidas en cada etapa.</p><p>Del primer intercambio a la publicación, un mismo equipo cuida el diseño y la tecnología.</p></div>
       <h2 id="process-title" data-reveal>Así lo construimos.</h2>
       <div className="method-bottom" data-reveal><p>Cuatro etapas. Una misma dirección.</p><a className="cta" href="#etapa-entender">Explora el proceso <Arrow direction="down" /></a></div>
       <nav className="method-nav" aria-label="Etapas del proyecto">{stages.map(stage => <a key={stage.title} href={`#etapa-${stage.title.toLowerCase()}`}><span>{stage.title}</span></a>)}</nav>

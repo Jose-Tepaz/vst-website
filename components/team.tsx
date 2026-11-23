@@ -63,7 +63,7 @@ export function Team() {
   return <section ref={section} id="equipo" className="team-section team-slider wrap" aria-labelledby="team-title">
     <div className="team-heading" data-reveal>
       <h2 id="team-title">Las personas<br />detrás de Vástago.</h2>
-      <p>Diseñamos, desarrollamos y construimos contigo. Conoce al equipo que acompaña tu proyecto de principio a fin.</p>
+      <p>Diseñamos y desarrollamos contigo. Conoce al equipo que acompaña tu proyecto de principio a fin.</p>
     </div>
     <div className="team-carousel" data-reveal role="region" aria-roledescription="carrusel" aria-label="Equipo de Vástago"
       onMouseEnter={() => setEngaged(true)} onMouseLeave={() => setEngaged(false)}
