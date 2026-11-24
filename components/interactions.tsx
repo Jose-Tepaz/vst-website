@@ -21,6 +21,15 @@ function Icon({ children }: { children: ReactNode }) {
 export function Menu({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // El botón flotante «Hablemos» se oculta al llegar a la sección de contacto.
+  const [atContact, setAtContact] = useState(false);
+  useEffect(() => {
+    const target = document.getElementById("contacto");
+    if (!target) return;
+    const observer = new IntersectionObserver(([entry]) => setAtContact(entry.isIntersecting), { threshold: 0.1 });
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
   const [active, setActive] = useState("");
   useEffect(() => {
     function close(event: KeyboardEvent) { if (event.key === "Escape") setOpen(false); }
@@ -60,6 +69,7 @@ export function Menu({ children }: { children: ReactNode }) {
     </nav>
     </header></div>
     {SHOW_ISLAND && <SectionIsland active={active} visible={scrolled} />}
+    <a className={`fab cta${scrolled && !atContact ? " is-on" : ""}`} href="#contacto" aria-hidden={!(scrolled && !atContact)} tabIndex={scrolled && !atContact ? 0 : -1}><span>Hablemos</span><Arrow /></a>
   </>;
 }
 

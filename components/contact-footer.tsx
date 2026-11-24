@@ -15,9 +15,7 @@ export function ContactFooter() {
       </div>
       <a className="contact-footer-email cta" data-reveal href={`mailto:${studio.email}`}><Roll>{studio.email}</Roll><Arrow /></a>
       <div className="contact-footer-signature" data-reveal>
-        <p>Del diseño al despliegue. <br />Un mismo equipo.</p>
-        <nav aria-label="Enlaces del pie de página"><a href="#proyectos">Proyectos</a><a href="#servicios">Servicios</a><a href="#estudio">Estudio</a></nav>
-        <a className="contact-footer-top cta" href="#inicio"><Roll>Volver arriba</Roll> <Arrow direction="up" /></a>
+        <a className="contact-footer-top cta" href="#inicio" aria-label="Volver al inicio"><Arrow direction="up" /></a>
       </div>
     </div>
   </footer>;

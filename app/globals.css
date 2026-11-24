@@ -761,3 +761,15 @@ h3{font-weight:700;letter-spacing:-.04em}
 .work-frame,.work-caption{width:min(100%,640px)}
 .work-pin{padding-block:70px}
 }
+
+/* Pie: solo una flecha redonda que lleva al inicio */
+.contact-footer-signature{justify-content:flex-end;margin-top:clamp(28px,4vh,56px)}
+.contact-footer-top.cta{display:grid;place-items:center;width:60px;height:60px;margin:0;padding:0;border-radius:50%;background:#fff;color:var(--blue);font-size:22px;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.contact-footer-top.cta:hover{transform:translateY(-4px)}
+
+/* Botón flotante «Hablemos»: aparece al bajar y desaparece al llegar al contacto */
+.fab{position:fixed;right:clamp(16px,2.4vw,36px);bottom:clamp(16px,2.4vw,32px);z-index:70;display:inline-flex;align-items:center;gap:16px;min-height:52px;padding:0 22px;border-radius:12px;background:var(--blue);color:#fff;font-size:15px;font-weight:600;letter-spacing:-.01em;opacity:0;visibility:hidden;transform:translateY(16px);transition:opacity .4s ease,transform .5s cubic-bezier(.16,1,.3,1),visibility .4s,background-color .3s}
+.fab.is-on{opacity:1;visibility:visible;transform:none}
+.fab:hover{background:color-mix(in srgb,var(--blue) 88%,#000);transform:translateY(-2px)}
+.fab.is-on:hover{transform:translateY(-2px)}
+@media(prefers-reduced-motion:reduce){.fab{transition:none}}
