@@ -1,6 +1,7 @@
 import { ProjectBrief } from "@/components/interactions";
 import { studio } from "@/lib/content";
 import { Arrow } from "@/components/arrow";
+import { Roll } from "@/components/roll";
 
 export function ContactFooter() {
   return <footer id="contacto" className="contact-footer" aria-labelledby="contact-title">
@@ -12,11 +13,11 @@ export function ContactFooter() {
         </div>
         <ProjectBrief />
       </div>
-      <a className="contact-footer-email cta" data-reveal href={`mailto:${studio.email}`}>{studio.email}<Arrow /></a>
+      <a className="contact-footer-email cta" data-reveal href={`mailto:${studio.email}`}><Roll>{studio.email}</Roll><Arrow /></a>
       <div className="contact-footer-signature" data-reveal>
         <p>Del diseño al despliegue. <br />Un mismo equipo.</p>
         <nav aria-label="Enlaces del pie de página"><a href="#proyectos">Proyectos</a><a href="#servicios">Servicios</a><a href="#estudio">Estudio</a></nav>
-        <a className="contact-footer-top cta" href="#inicio">Volver arriba <Arrow direction="up" /></a>
+        <a className="contact-footer-top cta" href="#inicio"><Roll>Volver arriba</Roll> <Arrow direction="up" /></a>
       </div>
     </div>
   </footer>;

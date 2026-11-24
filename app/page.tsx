@@ -1,13 +1,15 @@
-import Image from "next/image";
+import { PinBottom } from "@/components/pin-bottom";
+import { HeroMockup } from "@/components/hero-mockup";
+import { Studio } from "@/components/studio";
+import { ProjectShowcase } from "@/components/project-showcase";
 import { Menu, Motion } from "@/components/interactions";
-import { projects } from "@/lib/content";
 import { Services } from "@/components/services";
-import { PhraseRibbon } from "@/components/phrase-ribbon";
 import { Faq } from "@/components/faq";
 import { Team } from "@/components/team";
 import { ContactFooter } from "@/components/contact-footer";
 import { BuildProcess } from "@/components/build-process";
 import { Arrow } from "@/components/arrow";
+import { Roll } from "@/components/roll";
 
 function Logo() {
   return <a className="logo" href="#inicio" aria-label="Vástago Studio, inicio"><span className="monogram">VST</span><span className="logotype">Vástago<span>Studio</span></span></a>;
@@ -24,43 +26,35 @@ export default function Home() {
     <main id="contenido">
       <section id="inicio" className="hero hero-with-ribbon" aria-labelledby="hero-title">
         <div className="hero-content wrap">
-        <h1 id="hero-title">Del diseño<br />al despliegue.</h1>
+        <h1 id="hero-title">Del diseño<br /><span className="hl">al despliegue.</span></h1>
         <div className="hero-bottom">
           <p>Somos Vástago. Un estudio boutique de diseño y desarrollo de software. Creamos productos digitales, de la primera idea a las personas que los usan.</p>
+          <a className="cta hero-cta" href="#contacto"><Roll>Conozcamos tu proyecto</Roll> <Arrow /></a>
         </div>
+          <HeroMockup />
         </div>
-        <PhraseRibbon />
       </section>
 
+      <div className="cover-stack">
       <section id="proyectos" className="work wrap" aria-labelledby="work-title">
-        <div className="section-intro" data-reveal><h2 id="work-title">Trabajo<br />seleccionado.</h2><p>Cada proyecto empieza con una conversación.<br />Estos son algunos de los productos que hemos diseñado y desarrollado.</p></div>
-        <div className="projects">
-          {projects.map(project => <article className={`project ${project.cover}`} key={project.name} data-reveal>
-            {project.image ? <div className="project-cover project-photo"><Image src={`/images/projects/${project.image}`} alt={`Vista de ${project.name}`} fill sizes="(max-width: 650px) 100vw, (max-width: 1800px) 50vw, 900px" /></div> : <div className="project-cover" aria-hidden="true"><span className="cover-mark">{project.mark}</span><div className="cover-word">{project.word}<span>{project.sub}</span></div><span className="cover-caption">{project.name}</span></div>}
-            <h3>{project.name}</h3>
-            <p className="project-description">{project.description}</p>
-          </article>)}
-        </div>
+        <ProjectShowcase />
       </section>
 
       <Services />
 
-      <section id="estudio" className="studio studio-reframed wrap" aria-labelledby="studio-title">
-        <div className="studio-presentation">
-          <div className="studio-introduction"><h2 id="studio-title" data-reveal>Tu visión.<br />Nuestro compromiso.</h2><p data-reveal>Tú sabes qué quieres lograr y a quién quieres llegar. Nosotros nos involucramos para construir un producto digital que tenga sentido para quienes lo usan. Nos comprometemos a acompañarte en cada decisión de diseño y tecnología desde la primera conversación.</p><a className="cta" href="#contacto" data-reveal>Conozcamos tu proyecto <Arrow /></a></div>
-          <div className="studio-tenure" data-reveal><strong>+{yearsActive}</strong><p>años conectando<br />diseño y desarrollo.</p><span>De la primera idea al despliegue.</span></div>
-        </div>
-        <div className="studio-principles"><article data-reveal><h3>Cerca de tu equipo.</h3><p>Conversamos contigo, entendemos el contexto y compartimos las decisiones. Tu conocimiento del negocio forma parte del proyecto desde el inicio.</p></article><article data-reveal><h3>De principio a fin.</h3><p>Diseñamos pensando en cómo se construye y desarrollamos cuidando la experiencia. Un mismo equipo acompaña el producto hasta su despliegue.</p></article></div>
-      </section>
+      <div className="sheet">
+      <Studio years={yearsActive} />
+      </div>
 
       <BuildProcess />
 
-      <Team />
+      <div className="sheet"><Team /></div>
 
-      <Faq />
+      <PinBottom><Faq /></PinBottom>
 
+      <ContactFooter />
+      </div>
     </main>
-    <ContactFooter />
     <Motion />
   </>;
 }

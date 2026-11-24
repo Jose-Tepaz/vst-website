@@ -1,7 +1,17 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type CSSProperties, type PointerEvent, type ReactNode } from "react";
 import { Arrow } from "@/components/arrow";
+import { Roll } from "@/components/roll";
+import { RevealTitle } from "@/components/reveal-title";
+
+// Iconos de línea (trazo de 1.75, estilo Lucide): conversación, diseño, código y cohete.
+const icons: ReactNode[] = [
+  <svg key="0" viewBox="0 0 24 24"><path pathLength="1" d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12Z" /><path pathLength="1" d="M8.5 11.5h7M8.5 14.5h4" /></svg>,
+  <svg key="1" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5" /><path pathLength="1" d="M3 9h18M9 9v11" /></svg>,
+  <svg key="2" viewBox="0 0 24 24"><path pathLength="1" d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" /></svg>,
+  <svg key="3" viewBox="0 0 24 24"><path pathLength="1" d="M5 15c-1.5 1.3-2 4-2 6 2 0 4.7-.5 6-2M12 15l-3-3a22 22 0 0 1 2-4 12 12 0 0 1 11-5c0 3-1 8-5 11a22 22 0 0 1-5 1Z" /><circle cx="15.5" cy="8.5" r="1.4" /><path pathLength="1" d="M9 12H4s.5-3 2-4c1.3-.9 4 0 4 0M12 15v5s3-.5 4-2c1-1.5 0-4 0-4" /></svg>,
+];
 
 const stages = [
   { title: "Entender", phase: "El punto de partida", description: "Conversamos sobre tu negocio, las personas y el problema. Definimos qué construir y por qué.", result: "Una dirección compartida.", detail: "Negocio · Personas · Alcance" },
@@ -34,18 +44,38 @@ export function BuildProcess() {
     return () => { cancelAnimationFrame(frame); window.removeEventListener("scroll", schedule); window.removeEventListener("resize", schedule); reduced.removeEventListener("change", schedule); };
   }, []);
 
+  // El icono se mueve un poco con el cursor.
+  function move(event: PointerEvent<HTMLElement>) {
+    if (event.pointerType === "touch") return;
+    const card = event.currentTarget;
+    const box = card.getBoundingClientRect();
+    card.style.setProperty("--mx", ((event.clientX - box.left) / box.width - 0.5).toFixed(3));
+    card.style.setProperty("--my", ((event.clientY - box.top) / box.height - 0.5).toFixed(3));
+  }
+  function leave(event: PointerEvent<HTMLElement>) {
+    event.currentTarget.style.removeProperty("--mx");
+    event.currentTarget.style.removeProperty("--my");
+  }
+
   return <section id="proceso" className="method" aria-labelledby="process-title" ref={sectionRef}>
     <div className="method-head wrap">
       <div className="method-intro" data-reveal><p>Una conversación continua.<br />Decisiones compartidas en cada etapa.</p><p>Del primer intercambio a la publicación, un mismo equipo cuida el diseño y la tecnología.</p></div>
-      <h2 id="process-title" data-reveal>Así lo construimos.</h2>
-      <div className="method-bottom" data-reveal><p>Cuatro etapas. Una misma dirección.</p><a className="cta" href="#etapa-entender">Explora el proceso <Arrow direction="down" /></a></div>
-      <nav className="method-nav" aria-label="Etapas del proyecto">{stages.map(stage => <a key={stage.title} href={`#etapa-${stage.title.toLowerCase()}`}><span>{stage.title}</span></a>)}</nav>
+      <RevealTitle id="process-title" lines={[{ text: "Así lo", inline: true }, { text: "construimos.", highlight: true, inline: true }]} />
+      <div className="method-bottom" data-reveal><p>Cuatro etapas. Una misma dirección.</p><a className="cta" href="#etapa-entender"><Roll>Explora el proceso</Roll> <Arrow direction="down" /></a></div>
     </div>
-    <div className="method-stack">{stages.map((stage, index) => <article id={`etapa-${stage.title.toLowerCase()}`} className={`method-card method-card-${index}`} key={stage.title} aria-labelledby={`method-title-${index}`}>
+    <div className="method-stack">{stages.map((stage, index) => <article id={`etapa-${stage.title.toLowerCase()}`} className={`method-card method-card-${index}`} key={stage.title} aria-labelledby={`method-title-${index}`} style={{ "--i": index } as CSSProperties} onPointerMove={move} onPointerLeave={leave}>
       <div className="method-card-surface">
         <div className="method-card-top"><span>{stage.phase}</span><span>{String(index + 1).padStart(2, "0")} / 04</span></div>
-        <div className="method-card-body"><div className="method-card-copy"><h3 id={`method-title-${index}`}>{stage.title}</h3><p>{stage.description}</p><p className="method-detail">{stage.detail}</p></div><span className="method-numeral" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span></div>
-        <div className="method-card-bottom"><p>{stage.result}</p><a className="cta" href={index < stages.length - 1 ? `#etapa-${stages[index + 1].title.toLowerCase()}` : "#contacto"}>{index < stages.length - 1 ? "Siguiente etapa" : "Hablemos de tu proyecto"}<Arrow direction={index < stages.length - 1 ? "down" : "up-right"} /></a></div>
+        <div className="method-card-body">
+          <div className="method-card-copy">
+            <span className="method-icon" aria-hidden="true">{icons[index]}</span>
+            <h3 id={`method-title-${index}`}>{stage.title}</h3>
+            <p>{stage.description}</p>
+            <p className="method-detail">{stage.detail}</p>
+          </div>
+          <span className="method-numeral" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+        </div>
+        <div className="method-card-bottom"><p>{stage.result}</p><a className="cta" href={index < stages.length - 1 ? `#etapa-${stages[index + 1].title.toLowerCase()}` : "#contacto"}><Roll>{index < stages.length - 1 ? "Siguiente etapa" : "Hablemos de tu proyecto"}</Roll> <Arrow direction={index < stages.length - 1 ? "down" : "up-right"} /></a></div>
       </div>
     </article>)}</div>
   </section>;
