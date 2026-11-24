@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, type PointerEvent } from "react";
-import { projects } from "@/lib/content";
+import { projects, tidy } from "@/lib/content";
 import { RevealTitle } from "@/components/reveal-title";
 
 // Proyectos: la sección se queda fija en pantalla y, al hacer scroll, va pasando de un proyecto a otro.
@@ -82,13 +82,13 @@ export function ProjectShowcase() {
       </div>
       <div className="work-main">
         <div className="work-stage" onPointerMove={move} onPointerLeave={leave}>
-          <div className="work-frame" data-cursor="Ver">
+          <div className="work-frame">
             {shown.map((project, index) => <Image key={project.name} className={active === index ? "is-active" : previous === index ? "is-previous" : undefined} src={`/images/projects/${project.image}`} alt={active === index ? `Vista de ${project.name}` : ""} aria-hidden={active !== index} fill sizes="(max-width: 850px) 100vw, 900px" preload={index === 0} />)}
             <span className="work-glare" aria-hidden="true" />
             <span className="work-count" aria-hidden="true">{String(active + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>
           </div>
         </div>
-        <div className="work-caption" aria-live="polite"><h3>{current.name}</h3><p>{current.description}</p></div>
+        <div className="work-caption" aria-live="polite"><h3>{current.name}</h3><p>{tidy(current.description)}</p></div>
       </div>
     </div>
   </div>;

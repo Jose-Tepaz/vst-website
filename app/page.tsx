@@ -28,8 +28,8 @@ export default function Home() {
         <div className="hero-content wrap">
         <h1 id="hero-title">Del diseño<br /><span className="hl">al despliegue.</span></h1>
         <div className="hero-bottom">
-          <p>Somos Vástago. Un estudio boutique de diseño y desarrollo de software. Creamos productos digitales, de la primera idea a las personas que los usan.</p>
-          <a className="cta hero-cta" href="#contacto"><Roll>Conozcamos tu proyecto</Roll> <Arrow /></a>
+          <p>Somos Vástago. Un estudio boutique de diseño y desarrollo de software. Creamos productos digitales, de la primera idea a las personas que los usan.</p>
+          <a className="cta hero-cta" href="#contacto"><Roll>Cuéntanos tu proyecto</Roll> <Arrow /></a>
         </div>
           <HeroMockup />
         </div>

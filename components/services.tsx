@@ -3,7 +3,7 @@
 import { RevealTitle } from "@/components/reveal-title";
 
 import { Fragment, useEffect, useRef, useState } from "react";
-import { contactHref, services } from "@/lib/content";
+import { contactHref, services, tidy } from "@/lib/content";
 import { Arrow } from "@/components/arrow";
 import { Roll } from "@/components/roll";
 
@@ -74,7 +74,7 @@ export function Services() {
     </div>
     <div className="service-showcase" aria-label="Ejemplos conceptuales de nuestros servicios">{services.map((service, index) => <div key={service.name} hidden={active !== index} className="service-demo-frame"><ServiceDemo index={index} /></div>)}</div>
     <div className="service-chapters" ref={laneRef}>{services.map((service, index) => <Fragment key={service.name}><span className="service-marker" id={`servicio-${index}`} aria-hidden="true" /><article className={`service-chapter service-chapter-${index}`}>
-      <div className="service-chapter-copy"><h3>{service.name}</h3><p>{service.description}</p><ul>{service.scope.map(scope => <li key={scope}>{scope}</li>)}</ul><a className="cta" href={contactHref(service.short)} aria-label={`Hablemos de tu proyecto: ${service.name}`}><Roll>Hablemos de tu proyecto</Roll> <Arrow /></a></div>
+      <div className="service-chapter-copy"><h3>{service.name}</h3><p>{tidy(service.description)}</p><ul>{service.scope.map(scope => <li key={scope}>{scope}</li>)}</ul><a className="cta" href={contactHref(service.short)} aria-label={`Hablemos de tu proyecto: ${service.name}`}><Roll>Hablemos de tu proyecto</Roll> <Arrow /></a></div>
       <div className="service-demo-mobile"><ServiceDemo index={index} /></div>
     </article></Fragment>)}</div>
   </div></div></div></section>;

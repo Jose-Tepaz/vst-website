@@ -75,7 +75,7 @@ export function Team() {
           const depth = (index - active + portraitSlots.length) % portraitSlots.length;
           return <article className={`team-stack-card${depth === 0 ? " is-front" : ""}`} key={slot} aria-hidden={depth !== 0} style={{ "--depth": depth, "--drag-x": `${depth === 0 ? dragX : 0}px`, "--drag-rotation": `${depth === 0 ? dragX / 22 : 0}deg`, zIndex: portraitSlots.length - depth } as CSSProperties}>
             <div className={`team-portrait team-portrait-${index}`}>
-              <Image draggable={false} className="team-illustration" src="/images/team-illustration.png" alt="Retrato ilustrado de muestra para el equipo" fill sizes="(max-width: 650px) 85vw, 420px" />
+              <Image draggable={false} className="team-illustration" src="/images/team-illustration.png" alt={`Retrato ilustrado de ${index === 0 ? "Jose Tepaz" : "un integrante del equipo"}`} fill sizes="(max-width: 650px) 85vw, 420px" />
             </div>
             <div className="team-member-caption"><h3>{index === 0 ? "Jose Tepaz" : "Nombre por confirmar"}</h3><p>{index === 0 ? "Founder | Forward Deployed Engineer" : "Rol por confirmar"}</p></div>
           </article>;

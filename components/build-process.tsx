@@ -1,5 +1,7 @@
 "use client";
 
+import { tidy } from "@/lib/content";
+
 import { useEffect, useRef, type CSSProperties, type PointerEvent, type ReactNode } from "react";
 import { Arrow } from "@/components/arrow";
 import { Roll } from "@/components/roll";
@@ -70,12 +72,12 @@ export function BuildProcess() {
           <div className="method-card-copy">
             <span className="method-icon" aria-hidden="true">{icons[index]}</span>
             <h3 id={`method-title-${index}`}>{stage.title}</h3>
-            <p>{stage.description}</p>
+            <p>{tidy(stage.description)}</p>
             <p className="method-detail">{stage.detail}</p>
           </div>
           <span className="method-numeral" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
         </div>
-        <div className="method-card-bottom"><p>{stage.result}</p><a className="cta" href={index < stages.length - 1 ? `#etapa-${stages[index + 1].title.toLowerCase()}` : "#contacto"}><Roll>{index < stages.length - 1 ? "Siguiente etapa" : "Hablemos de tu proyecto"}</Roll> <Arrow direction={index < stages.length - 1 ? "down" : "up-right"} /></a></div>
+        <div className="method-card-bottom"><p>{tidy(stage.result)}</p><a className="cta" href={index < stages.length - 1 ? `#etapa-${stages[index + 1].title.toLowerCase()}` : "#contacto"}><Roll>{index < stages.length - 1 ? "Siguiente etapa" : "Hablemos de tu proyecto"}</Roll> <Arrow direction={index < stages.length - 1 ? "down" : "up-right"} /></a></div>
       </div>
     </article>)}</div>
   </section>;

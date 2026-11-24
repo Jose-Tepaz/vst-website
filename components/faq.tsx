@@ -1,3 +1,4 @@
+import { tidy } from "@/lib/content";
 import { RevealTitle } from "@/components/reveal-title";
 import { Roll } from "@/components/roll";
 import type { CSSProperties } from "react";
@@ -16,6 +17,6 @@ const questions = [
 export function Faq() {
   return <section id="preguntas" className="faq-section wrap" aria-labelledby="faq-title">
     <div className="faq-intro"><RevealTitle id="faq-title" lines={[{ text: "Preguntas" }, { text: "frecuentes.", highlight: true }]} /><p>Resolvemos algunas preguntas que suelen aparecer al construir un producto digital.</p><a className="cta" href="#contacto"><Roll>¿Tienes otra pregunta? Hablemos</Roll> <Arrow /></a></div>
-    <div className="faq-list">{questions.map((item, index) => <details className="faq-item" data-reveal style={{ "--i": index } as CSSProperties} name="studio-faq" key={item.question}><summary>{item.question}<span className="faq-indicator" aria-hidden="true">+</span></summary><p>{item.answer}</p></details>)}</div>
+    <div className="faq-list">{questions.map((item, index) => <details className="faq-item" data-reveal style={{ "--i": index } as CSSProperties} name="studio-faq" key={item.question}><summary>{tidy(item.question)}<span className="faq-indicator" aria-hidden="true">+</span></summary><p>{tidy(item.answer)}</p></details>)}</div>
   </section>;
 }

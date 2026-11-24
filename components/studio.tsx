@@ -1,5 +1,7 @@
 "use client";
 
+import { tidy } from "@/lib/content";
+
 import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
 import { Arrow } from "@/components/arrow";
 import { Roll } from "@/components/roll";
@@ -61,7 +63,7 @@ export function Studio({ years }: { years: number }) {
     <div className="st-top">
       <div className="st-intro">
         <RevealTitle id="studio-title" lines={[{ text: "Tu visión." }, { text: "Nuestro compromiso.", highlight: true }]} />
-        <p data-reveal>Tú sabes qué quieres lograr y a quién quieres llegar. Nosotros nos involucramos para construir un producto digital que tenga sentido para quienes lo usan. Nos comprometemos a acompañarte en cada decisión de diseño y tecnología desde la primera conversación.</p>
+        <p data-reveal>Tú sabes qué quieres lograr y a quién quieres llegar. Nosotros nos involucramos para construir un producto digital que tenga sentido para quienes lo usan. Nos comprometemos a acompañarte en cada decisión de diseño y tecnología desde la primera conversación.</p>
         <a className="cta" href="#contacto" data-reveal><Roll>Conozcamos tu proyecto</Roll> <Arrow /></a>
       </div>
       <div className="st-tenure-wrap" data-reveal>
@@ -76,7 +78,7 @@ export function Studio({ years }: { years: number }) {
     <div className="st-cards">
       {principles.map((principle, index) => <article key={principle.title} className="st-card" data-reveal style={{ "--stagger": index } as CSSProperties} onPointerMove={glow} onPointerLeave={reset}>
         <h3>{principle.title}</h3>
-        <p>{principle.text}</p>
+        <p>{tidy(principle.text)}</p>
       </article>)}
     </div>
   </section>;

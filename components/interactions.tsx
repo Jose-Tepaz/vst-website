@@ -69,7 +69,7 @@ export function Menu({ children }: { children: ReactNode }) {
     </nav>
     </header></div>
     {SHOW_ISLAND && <SectionIsland active={active} visible={scrolled} />}
-    <a className={`fab cta${scrolled && !atContact ? " is-on" : ""}`} href="#contacto" aria-hidden={!(scrolled && !atContact)} tabIndex={scrolled && !atContact ? 0 : -1}><span>Hablemos</span><Arrow /></a>
+    <a className={`fab cta${scrolled && !atContact ? " is-on" : ""}`} href="#contacto" aria-label="Hablemos de tu proyecto" aria-hidden={!(scrolled && !atContact)} tabIndex={scrolled && !atContact ? 0 : -1}><span className="fab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12Z" /><circle cx="8.5" cy="12" r=".9" /><circle cx="12" cy="12" r=".9" /><circle cx="15.5" cy="12" r=".9" /></svg></span><span className="fab-label">Hablemos</span></a>
   </>;
 }
 

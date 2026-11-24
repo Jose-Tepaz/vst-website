@@ -5,7 +5,7 @@ export const studio = {
 
 export const projects = [
   { name: "Eppigo", cover: "eppigo", word: "Eppigo", sub: "", mark: "e", image: "eppigo-4.png", description: "Marketplace de seguros para cotizar, comparar y contratar pólizas en línea en Estados Unidos, en pocos pasos." },
-  { name: "Winkelman", cover: "winkelman", word: "Winkelman", sub: "", mark: "W", image: "winkelman-1.png", description: "Sitio web renovado para presentar con claridad sus servicios de ingeniería civil y topografía y facilitar el contacto con sus clientes en Estados Unidos." },
+  { name: "Winkelman", cover: "winkelman", word: "Winkelman", sub: "", mark: "W", image: "winkelman-1.png", description: "Sitio web renovado que presenta con claridad los servicios de ingeniería civil y topografía de Winkelman, y facilita el contacto con sus clientes en Estados Unidos." },
   {
     name: "GoAMS",
     cover: "goams",
@@ -30,4 +30,10 @@ export const services = [
 
 export function contactHref(service?: string) {
   return `mailto:${studio.email}?subject=${encodeURIComponent("Un nuevo proyecto con Vástago")}&body=${encodeURIComponent(`Hola, Vástago.\n\nQuiero conversar sobre ${service || "un proyecto"}.\n\nMi idea es:\n\n`)}`;
+}
+
+// Une las dos últimas palabras de un texto con un espacio sin salto, para que no quede una palabra sola en la última línea.
+export function tidy(text: string) {
+  const index = text.lastIndexOf(" ");
+  return index > 0 ? `${text.slice(0, index)}\u00A0${text.slice(index + 1)}` : text;
 }

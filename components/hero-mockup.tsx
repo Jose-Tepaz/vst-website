@@ -5,7 +5,7 @@ import { useEffect, useRef, useState, type PointerEvent } from "react";
 const stages = [
   { name: "Diseño", status: "Definiendo la experiencia", progress: 30, items: ["Entender tu negocio", "Prototipo navegable", "Revisión contigo"], done: 1 },
   { name: "Desarrollo", status: "Construyendo cada pantalla", progress: 68, items: ["Interfaz lista", "Conexión con tus sistemas", "Pruebas con personas"], done: 2 },
-  { name: "Lanzamiento", status: "Listo para publicarse", progress: 100, items: ["Ajustes finales", "Despliegue", "Acompañamiento"], done: 3 },
+  { name: "Despliegue", status: "Listo para publicarse", progress: 100, items: ["Ajustes finales", "Publicación", "Acompañamiento"], done: 3 },
 ];
 
 // Teléfono interactivo del inicio: sigue el cursor, y sus pestañas recorren las etapas de un proyecto.
@@ -42,7 +42,7 @@ export function HeroMockup() {
     <div className="hm-phone">
       <span className="hm-island" aria-hidden="true" />
       <div className="hm-screen">
-        <p className="hm-hello">Tu proyecto, en un solo lugar.</p>
+        <p className="hm-hello">Así avanza tu proyecto.</p>
         <h3 key={stage}>{current.status}</h3>
         <div className="hm-tabs" role="tablist" aria-label="Etapas del proyecto">
           {stages.map((item, index) => <button key={item.name} type="button" role="tab" aria-selected={stage === index} onClick={() => { setManual(true); setStage(index); }}>{item.name}</button>)}

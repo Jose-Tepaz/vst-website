@@ -773,3 +773,37 @@ h3{font-weight:700;letter-spacing:-.04em}
 .fab:hover{background:color-mix(in srgb,var(--blue) 88%,#000);transform:translateY(-2px)}
 .fab.is-on:hover{transform:translateY(-2px)}
 @media(prefers-reduced-motion:reduce){.fab{transition:none}}
+
+/* Botón flotante: círculo con un icono de conversación que se despliega y muestra «Hablemos» al pasar el cursor */
+.fab{gap:0;width:56px;min-height:56px;height:56px;padding:0;border-radius:999px;overflow:hidden;justify-content:flex-start;transition:opacity .4s ease,transform .5s cubic-bezier(.16,1,.3,1),visibility .4s,width .55s cubic-bezier(.16,1,.3,1),background-color .3s}
+.fab:hover,.fab:focus-visible{width:160px}
+.fab-icon{display:grid;place-items:center;flex:none;width:56px;height:56px}
+.fab-icon svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.fab-icon circle{fill:currentColor;stroke:none}
+.fab:hover .fab-icon svg{transform:rotate(-8deg) scale(1.08)}
+.fab:hover .fab-icon circle{animation:fab-dot .9s ease-in-out infinite}
+.fab:hover .fab-icon circle:nth-child(3){animation-delay:.15s}.fab:hover .fab-icon circle:nth-child(4){animation-delay:.3s}
+@keyframes fab-dot{0%,100%{opacity:1}50%{opacity:.25}}
+.fab-label{white-space:nowrap;padding-right:24px;opacity:0;transform:translateX(-10px);transition:opacity .35s ease,transform .5s cubic-bezier(.16,1,.3,1)}
+.fab:hover .fab-label,.fab:focus-visible .fab-label{opacity:1;transform:none}
+.fab::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 0 rgba(0,128,255,.45);pointer-events:none}
+.fab.is-on::after{animation:fab-ring 2.4s ease-out .6s 2}
+@keyframes fab-ring{0%{box-shadow:0 0 0 0 rgba(0,128,255,.45)}100%{box-shadow:0 0 0 18px rgba(0,128,255,0)}}
+@media(prefers-reduced-motion:reduce){.fab::after,.fab:hover .fab-icon circle{animation:none}.fab-label,.fab-icon svg{transition:none}}
+
+/* Botón flotante: transiciones más lentas y suaves */
+.fab{transition:opacity .5s ease,transform .7s cubic-bezier(.33,.9,.4,1),visibility .5s,width .85s cubic-bezier(.45,.05,.2,1),background-color .4s ease}
+.fab:hover,.fab:focus-visible{width:156px}
+.fab-icon svg{transition:transform .8s cubic-bezier(.45,.05,.2,1)}
+.fab:hover .fab-icon svg{transform:rotate(-4deg) scale(1.04)}
+.fab:hover .fab-icon circle{animation:fab-dot 1.6s ease-in-out infinite}
+@keyframes fab-dot{0%,100%{opacity:1}50%{opacity:.45}}
+.fab-label{transform:translateX(-6px);transition:opacity .5s ease,transform .8s cubic-bezier(.45,.05,.2,1)}
+.fab:hover .fab-label,.fab:focus-visible .fab-label{transition-delay:.15s}
+.fab.is-on::after{animation:fab-ring 3s ease-out .8s 1}
+.fab.cta{transition:opacity .5s ease,transform .7s cubic-bezier(.33,.9,.4,1),visibility .5s,width .85s cubic-bezier(.45,.05,.2,1),background-color .4s ease}
+@media(prefers-reduced-motion:reduce){.fab.cta{transition:none}}
+
+/* Sin palabras huérfanas: los títulos se reparten parejo y los párrafos evitan dejar una palabra sola en la última línea */
+h1,h2,h3,h4{text-wrap:balance}
+p,li,figcaption,summary{text-wrap:pretty}
