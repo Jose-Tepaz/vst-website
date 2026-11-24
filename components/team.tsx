@@ -1,7 +1,8 @@
 "use client";
 
+import { RevealTitle } from "@/components/reveal-title";
+
 import Image from "next/image";
-import { PhraseRibbon } from "@/components/phrase-ribbon";
 import { Arrow } from "@/components/arrow";
 import { useEffect, useRef, useState, type PointerEvent, type CSSProperties } from "react";
 
@@ -62,14 +63,13 @@ export function Team() {
   }
   return <section ref={section} id="equipo" className="team-section team-slider wrap" aria-labelledby="team-title">
     <div className="team-heading" data-reveal>
-      <h2 id="team-title">Las personas<br />detrás de Vástago.</h2>
-      <p>Diseñamos, desarrollamos y construimos contigo. Conoce al equipo que acompaña tu proyecto de principio a fin.</p>
+      <RevealTitle id="team-title" lines={[{ text: "Las personas" }, { text: "detrás de Vástago.", highlight: true }]} />
+      <p>Diseñamos y desarrollamos contigo. Conoce al equipo que acompaña tu proyecto de principio a fin.</p>
     </div>
     <div className="team-carousel" data-reveal role="region" aria-roledescription="carrusel" aria-label="Equipo de Vástago"
       onMouseEnter={() => setEngaged(true)} onMouseLeave={() => setEngaged(false)}
       onFocusCapture={() => setEngaged(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setEngaged(false); }}
       onKeyDown={event => { if (event.key === "ArrowRight" || event.key === "ArrowLeft") { event.preventDefault(); move(event.key === "ArrowRight" ? 1 : -1); } }}>
-      <div className="team-ribbon-background" aria-hidden="true" inert><PhraseRibbon /></div>
       <div className={`team-deck${dragging ? " is-dragging" : ""}`} onPointerDown={startDrag} onPointerMove={updateDrag} onPointerUp={event => finishDrag(event)} onPointerCancel={event => finishDrag(event, true)} onLostPointerCapture={event => finishDrag(event, true)} onDragStart={event => event.preventDefault()}>
         {portraitSlots.map((slot, index) => {
           const depth = (index - active + portraitSlots.length) % portraitSlots.length;

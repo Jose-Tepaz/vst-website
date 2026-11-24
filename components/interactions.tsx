@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { contactHref, services, studio } from "@/lib/content";
+import { contactHref, services } from "@/lib/content";
 import { Arrow } from "@/components/arrow";
+import { Roll } from "@/components/roll";
 
 // Iconos de Lucide (licencia ISC): layout-grid, sparkles, users, message-circle y ellipsis.
 // Las formas con clase "f" se rellenan suavemente cuando la sección está activa.
@@ -50,15 +51,15 @@ export function Menu({ children }: { children: ReactNode }) {
   return <>
     <div className="header-space"><header className={`header scroll-header${showTop ? " is-visible" : ""}`} aria-hidden={!showTop} inert={!showTop}>
     {children}
-    <button className="menu-toggle cta" aria-expanded={open} aria-controls="navigation" onClick={() => setOpen(!open)}>{open ? "Cerrar" : "Menú"}</button>
+    <button className="menu-toggle cta" aria-expanded={open} aria-controls="navigation" onClick={() => setOpen(!open)}><Roll>{open ? "Cerrar" : "Menú"}</Roll></button>
     <nav id="navigation" className={open ? "navigation is-open" : "navigation"} aria-label="Principal">
-      <a className="cta" href="#proyectos" onClick={() => setOpen(false)}>Proyectos</a>
-      <a className="cta" href="#servicios" onClick={() => setOpen(false)}>Servicios</a>
-      <a className="cta" href="#estudio" onClick={() => setOpen(false)}>Estudio</a>
-      <a className="nav-contact cta" href="#contacto" onClick={() => setOpen(false)}>Hablemos <Arrow /></a>
+      <a className="cta" href="#proyectos" onClick={() => setOpen(false)}><Roll>Proyectos</Roll></a>
+      <a className="cta" href="#servicios" onClick={() => setOpen(false)}><Roll>Servicios</Roll></a>
+      <a className="cta" href="#estudio" onClick={() => setOpen(false)}><Roll>Estudio</Roll></a>
+      <a className="nav-contact cta" href="#contacto" onClick={() => setOpen(false)}><Roll>Hablemos</Roll> <Arrow /></a>
     </nav>
     </header></div>
-    <SectionIsland active={active} visible={scrolled} />
+    {SHOW_ISLAND && <SectionIsland active={active} visible={scrolled} />}
   </>;
 }
 
@@ -66,6 +67,9 @@ export function Menu({ children }: { children: ReactNode }) {
 // Cerrada: muestra la sección actual y el botón «···»; al cambiar de sección, el nombre anterior se desvanece
 // y el nuevo entra desenfocado hasta quedar nítido. En la portada (sin sección aún) solo se ve el «···».
 // Abierta: muestra todas las secciones; la píldora se desliza hasta la que señalas y despliega su nombre.
+// Menú flotante de secciones: oculto por ahora. Cambia a true para mostrarlo de nuevo.
+const SHOW_ISLAND = false;
+
 function SectionIsland({ active, visible }: { active: string; visible: boolean }) {
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState<number | null>(null);
@@ -169,10 +173,10 @@ export function ProjectBrief() {
   return <div className="brief" data-reveal>
     <p>Quiero construir…</p>
     <div className="brief-options" aria-label="Selecciona los servicios para tu proyecto">
-      {services.map(service => <button key={service.name} type="button" className="cta" aria-pressed={selected.includes(service.short)} onClick={() => toggle(service.short)}>{service.short}<span className="brief-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">{selected.includes(service.short) ? <path d="M5 12.5 10 17.5 19 7" /> : <path d="M12 5v14M5 12h14" />}</svg></span></button>)}
+      {services.map(service => <button key={service.name} type="button" className="cta" aria-pressed={selected.includes(service.short)} onClick={() => toggle(service.short)}><Roll>{service.short}</Roll><span className="brief-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">{selected.includes(service.short) ? <path d="M5 12.5 10 17.5 19 7" /> : <path d="M12 5v14M5 12h14" />}</svg></span></button>)}
     </div>
-    <a className="button contact-button cta" href={contactHref(selected.length ? selected.join(" y ") : undefined)}>Hablemos de tu proyecto <Arrow /></a>
-    <p className="contact-note">Elige uno o varios. Se abrirá tu correo con el mensaje listo. Si no, escribe a {studio.email}.</p>
+    <a className="button contact-button cta" href={contactHref(selected.length ? selected.join(" y ") : undefined)}><Roll>Hablemos de tu proyecto</Roll> <Arrow /></a>
+    <p className="contact-note">Elige uno o varios y se abrirá tu correo con el mensaje listo.</p>
   </div>;
 }
 
