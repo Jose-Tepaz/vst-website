@@ -870,3 +870,8 @@ p,li,figcaption,summary{text-wrap:pretty}
 /* Móvil: el contenido del teléfono ya no es una zona con scroll propio (atrapaba el dedo); la página se desplaza normal */
 @media(max-width:850px){.iphone-shell .demo-content{overflow:hidden;overscroll-behavior:auto;touch-action:pan-y}.iphone-shell .demo-content>*{flex-shrink:0}}
 @media(max-width:850px){.iphone-shell .demo-content{zoom:.76}}
+
+/* Móvil: las tarjetas apiladas no se recortan a los lados (el clip cortaba sombra y borde) */
+@media(max-width:850px),(max-height:699px){.work-stack{overflow:visible}.work-track{overflow-x:clip;overflow-clip-margin:24px}.work-card{box-shadow:0 -10px 26px -14px #0b0e1340,0 0 0 1px #0b0e1318}}
+/* Sin borde fino alrededor de las tarjetas apiladas: solo una sombra suave arriba */
+@media(max-width:850px),(max-height:699px){.work-card{box-shadow:0 -14px 30px -18px #0b0e1333}}
