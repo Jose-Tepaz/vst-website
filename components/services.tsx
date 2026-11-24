@@ -49,6 +49,16 @@ function ServiceDemo({ index }: { index: number }) {
 
 export function Services() {
   const [active, setActive] = useState(0);
+  // En móvil la lista funciona como acordeón: cada + abre su servicio y vuelve a cerrarlo.
+  const [mobile, setMobile] = useState(false);
+  const [open, setOpen] = useState<number | null>(null);
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 850px)");
+    const sync = () => setMobile(query.matches);
+    sync();
+    query.addEventListener("change", sync);
+    return () => query.removeEventListener("change", sync);
+  }, []);
   const laneRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     let frame = 0;
@@ -70,7 +80,11 @@ export function Services() {
   }, []);
 
   return <section id="servicios" className="services services-scroll" aria-labelledby="services-title"><div className="wrap"><div className="service-panel"><div className="service-journey">
-    <div className="service-rail"><RevealTitle id="services-title" lines={[{ text: "Lo que" }, { text: "hacemos.", highlight: true }]} /><p>Diseño y desarrollo.<br />Un mismo equipo.</p><nav aria-label="Nuestros servicios">{services.map((service, index) => <a key={service.name} href={`#servicio-${index}`} aria-current={active === index ? "step" : undefined}>{service.name}<span className="service-arrow" aria-hidden="true"><i>+</i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M8 7h9v9" /></svg></span></a>)}</nav>
+    <div className="service-rail"><RevealTitle id="services-title" lines={[{ text: "Lo que" }, { text: "hacemos.", highlight: true }]} /><p>Diseño y desarrollo.<br />Un mismo equipo.</p><nav aria-label="Nuestros servicios">{services.map((service, index) => <Fragment key={service.name}><a href={`#servicio-${index}`} aria-current={!mobile && active === index ? "step" : undefined} aria-expanded={mobile ? open === index : undefined} aria-controls={mobile ? `servicio-panel-${index}` : undefined} onClick={event => { if (!mobile) return; event.preventDefault(); setOpen(open === index ? null : index); }}>{service.name}<span className="service-arrow" aria-hidden="true"><i>+</i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M8 7h9v9" /></svg></span></a>
+      <div className={`service-acc${open === index ? " is-open" : ""}`} id={`servicio-panel-${index}`} role="region" aria-label={service.name} inert={open !== index}><div className="service-acc-inner"><article className={`service-chapter service-chapter-${index}`}>
+        <div className="service-chapter-copy"><h3>{service.name}</h3><p>{tidy(service.description)}</p><ul>{service.scope.map(scope => <li key={scope}>{scope}</li>)}</ul><a className="cta" href={contactHref(service.short)} aria-label={`Hablemos de tu proyecto: ${service.name}`}><Roll>Hablemos de tu proyecto</Roll> <Arrow /></a></div>
+        {open === index && <div className="service-demo-mobile"><ServiceDemo index={index} /></div>}
+      </article></div></div></Fragment>)}</nav>
     </div>
     <div className="service-showcase" aria-label="Ejemplos conceptuales de nuestros servicios">{services.map((service, index) => <div key={service.name} hidden={active !== index} className="service-demo-frame"><ServiceDemo index={index} /></div>)}</div>
     <div className="service-chapters" ref={laneRef}>{services.map((service, index) => <Fragment key={service.name}><span className="service-marker" id={`servicio-${index}`} aria-hidden="true" /><article className={`service-chapter service-chapter-${index}`}>

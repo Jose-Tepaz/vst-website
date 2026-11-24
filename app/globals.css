@@ -808,13 +808,6 @@ h3{font-weight:700;letter-spacing:-.04em}
 h1,h2,h3,h4{text-wrap:balance}
 p,li,figcaption,summary{text-wrap:pretty}
 
-/* Números del proceso: cada dígito rueda hasta su valor al entrar la tarjeta */
-.method-numeral{display:inline-flex}
-.method-numeral .digit{display:block;height:1em;margin-block:-.075em;overflow:hidden}
-.method-numeral .digit-col{display:flex;flex-direction:column;transform:translateY(-90%);transition:transform 0s}
-.method-numeral .digit-col i{display:block;height:1em;font-style:normal;line-height:1em}
-.method-card.is-on .digit-col{transform:translateY(calc(var(--d) * -10%));transition:transform 1.5s cubic-bezier(.16,1,.3,1) calc(var(--n) * .18s + .1s)}
-@media(prefers-reduced-motion:reduce){.method-numeral .digit-col{transform:translateY(calc(var(--d) * -10%))}}
 
 /* Proyectos en móvil: tarjetas que se sobreponen al hacer scroll */
 .work-stack{display:none}
@@ -833,3 +826,47 @@ p,li,figcaption,summary{text-wrap:pretty}
 
 /* Móvil: 48px de aire arriba y abajo en cada sección */
 @media(max-width:650px){body .work,body .studio,body .faq-section,body .method,body .services-scroll,body .team-section,body .contact{padding-block:48px}}
+
+/* Móvil: el hero también respira 48px arriba y abajo, sin estirarse a toda la pantalla */
+@media(max-width:650px){body .hero.hero-with-ribbon{min-height:0;padding-block:48px}body .hero-with-ribbon .hero-content{min-height:0;padding-top:0;justify-content:flex-start}}
+@media(max-width:650px){body .sheet>section,body .sheet>.st,body .studio,body .services.services-scroll,body .contact-footer{padding-block:48px!important}}
+
+/* Servicios en móvil: acordeón, cada + abre y cierra su servicio */
+.service-acc{display:none}
+@media(max-width:850px){
+.service-chapters{display:none}
+.service-rail nav{flex-direction:column;flex-wrap:nowrap;gap:0}
+.service-acc{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s cubic-bezier(.16,1,.3,1)}
+.service-acc.is-open{grid-template-rows:1fr}
+.service-acc-inner{min-height:0;overflow:hidden}
+.service-acc.is-open .service-acc-inner{padding-block:6px 20px}
+.service-acc .service-chapter{margin:0}
+.service-rail nav a[aria-expanded=true]{color:var(--paper)}
+.service-rail nav a[aria-expanded=true] .service-arrow{background:color-mix(in srgb,var(--blue) 26%,transparent);color:#9CCBFF}
+.service-rail nav a[aria-expanded] .service-arrow svg{display:none}
+.service-rail nav a[aria-expanded] .service-arrow i{transition:transform .35s;opacity:1!important;transform:none!important}
+.service-rail nav a[aria-expanded=true] .service-arrow i{transform:rotate(45deg)!important}
+}
+@media(prefers-reduced-motion:reduce){.service-acc{transition:none}}
+.services-scroll .service-rail nav .service-acc a.cta,.services-scroll .service-rail nav .service-acc a.cta:hover{color:inherit;min-height:0;padding-block:0;font-size:inherit;font-weight:inherit;justify-content:flex-start}
+
+/* Móvil: el teléfono conserva su proporción (antes tenía alto fijo y se estiraba al estrecharse) */
+@media(max-width:850px){
+.service-acc .service-chapter{padding:18px}
+.iphone-shell{height:auto;aspect-ratio:9/19}
+.iphone-shell .demo-content{padding:14px}
+.iphone-shell .demo-content h4{font-size:clamp(20px,6.4vw,26px);line-height:1.05}
+.iphone-shell .demo-content,.iphone-shell .demo-content p,.iphone-shell .demo-content li{font-size:13px}
+.iphone-shell .demo-content h4{font-size:clamp(20px,6.4vw,26px)}
+}
+@media(max-width:850px){.iphone-shell .demo-site-page{padding:14px;min-height:0}.iphone-shell .demo-site-page strong{font-size:16px}.iphone-shell .demo-site-page p{display:none}.iphone-shell .demo-site-nav{padding:10px}}
+@media(max-width:850px){.iphone-shell .demo-site-action{display:none}}
+
+/* "Desde 2022" va en el flujo (antes flotaba y se encimaba con el +4 en móvil) */
+.st-chip{position:static;align-self:flex-start;margin-bottom:auto}
+.st-tenure strong{margin-top:22px}
+@media(max-width:650px){body .method-stack{padding-bottom:0}}
+
+/* Móvil: el contenido del teléfono ya no es una zona con scroll propio (atrapaba el dedo); la página se desplaza normal */
+@media(max-width:850px){.iphone-shell .demo-content{overflow:hidden;overscroll-behavior:auto;touch-action:pan-y}.iphone-shell .demo-content>*{flex-shrink:0}}
+@media(max-width:850px){.iphone-shell .demo-content{zoom:.76}}

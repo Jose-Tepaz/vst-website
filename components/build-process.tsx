@@ -22,11 +22,6 @@ const stages = [
   { title: "Desplegar", phase: "Listo para salir", description: "Publicamos tu producto para que empiece a usarse. Revisamos que todo funcione y acordamos cómo acompañar lo que sigue.", result: "Tu producto, listo para usarse.", detail: "Despliegue · Revisión · Acompañamiento" },
 ];
 
-// Cifra tipo odómetro: una columna 0-9 que rueda hasta el dígito de la etapa.
-function Numeral({ value }: { value: string }) {
-  return <span className="method-numeral" aria-hidden="true">{value.split("").map((digit, index) => <span className="digit" key={index}><span className="digit-col" style={{ "--d": Number(digit), "--n": index } as CSSProperties}>{Array.from({ length: 10 }, (_, n) => <i key={n}>{n}</i>)}</span></span>)}</span>;
-}
-
 export function BuildProcess() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -44,17 +39,11 @@ export function BuildProcess() {
       });
     }
     function schedule() { if (!frame) frame = requestAnimationFrame(update); }
-    // Los números ruedan cuando la etapa entra en pantalla y se reinician al salir, para que se vean cada vez.
-    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) entry.target.classList.add("is-on");
-      else if (entry.intersectionRatio < 0.1) entry.target.classList.remove("is-on");
-    }), { threshold: [0, 0.1, 0.5] });
-    cards.forEach(card => observer.observe(card));
     update();
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
     reduced.addEventListener("change", schedule);
-    return () => { observer.disconnect(); cancelAnimationFrame(frame); window.removeEventListener("scroll", schedule); window.removeEventListener("resize", schedule); reduced.removeEventListener("change", schedule); };
+    return () => { cancelAnimationFrame(frame); window.removeEventListener("scroll", schedule); window.removeEventListener("resize", schedule); reduced.removeEventListener("change", schedule); };
   }, []);
 
   // El icono se mueve un poco con el cursor.
@@ -86,7 +75,7 @@ export function BuildProcess() {
             <p>{tidy(stage.description)}</p>
             <p className="method-detail">{stage.detail}</p>
           </div>
-          <Numeral value={String(index + 1).padStart(2, "0")} />
+          <span className="method-numeral" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
         </div>
         <div className="method-card-bottom"><p>{tidy(stage.result)}</p><a className="cta" href={index < stages.length - 1 ? `#etapa-${stages[index + 1].title.toLowerCase()}` : "#contacto"}><Roll>{index < stages.length - 1 ? "Siguiente etapa" : "Hablemos de tu proyecto"}</Roll> <Arrow direction={index < stages.length - 1 ? "down" : "up-right"} /></a></div>
       </div>
