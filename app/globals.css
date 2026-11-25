@@ -890,3 +890,11 @@ p,li,figcaption,summary{text-wrap:pretty}
 
 /* Móvil: más aire bajo la última pregunta para que el botón flotante no quede pegado al signo + */
 @media(max-width:650px){body .faq-section{padding-bottom:120px!important}}
+
+/* Móvil: hero compacto. Titular, texto y botón juntos, sin huecos: el alto lo da el contenido. */
+@media(max-width:650px){
+body .hero.hero-with-ribbon{min-height:0;display:block;padding-top:calc(89px + 32px);padding-bottom:56px}
+body .hero-with-ribbon .hero-content{display:flex;flex-direction:column;justify-content:flex-start;gap:28px;min-height:0;padding-top:0}
+body .hero-with-ribbon .hero-content h1{font-size:clamp(50px,14.4vw,76px)}
+body .hero-with-ribbon .hero-bottom{margin-top:0;gap:28px}
+}
