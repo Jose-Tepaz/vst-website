@@ -899,3 +899,14 @@ body .hero-with-ribbon .hero-content{display:flex;flex-direction:column;justify-
 body .hero-with-ribbon .hero-content h1{font-size:clamp(50px,14.4vw,76px)}
 body .hero-with-ribbon .hero-bottom{margin-top:0;gap:28px}
 }
+
+/* Móvil: el contacto ya no se sobrepone a las preguntas y los chips van de 2 en 2 */
+@media(max-width:850px){
+.pin-bottom{position:static!important;margin-bottom:0}
+.contact-footer{min-height:0}
+}
+@media(max-width:650px){
+body .faq-section{padding-bottom:48px!important}
+body .contact-footer .brief-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+body .contact-footer .brief-options button{width:100%;min-width:0;min-height:48px;padding:12px;gap:8px;justify-content:space-between;font-size:13px}
+}
