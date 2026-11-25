@@ -891,10 +891,11 @@ p,li,figcaption,summary{text-wrap:pretty}
 /* Móvil: más aire bajo la última pregunta para que el botón flotante no quede pegado al signo + */
 @media(max-width:650px){body .faq-section{padding-bottom:120px!important}}
 
-/* Móvil: hero compacto. Titular, texto y botón juntos, sin huecos: el alto lo da el contenido. */
+/* Móvil: hero compacto, texto a la izquierda. El aire de arriba se compensa con el del encabezado para que
+   visualmente haya lo mismo arriba que abajo (≈56px desde el logo y desde el botón). */
 @media(max-width:650px){
-body .hero.hero-with-ribbon{min-height:0;display:block;padding-top:calc(89px + 32px);padding-bottom:56px}
-body .hero-with-ribbon .hero-content{display:flex;flex-direction:column;justify-content:flex-start;gap:28px;min-height:0;padding-top:0}
+body .hero.hero-with-ribbon{min-height:0;display:block;padding-top:36px;padding-bottom:56px}
+body .hero-with-ribbon .hero-content{display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;text-align:left;gap:24px;min-height:0;padding-top:0}
 body .hero-with-ribbon .hero-content h1{font-size:clamp(50px,14.4vw,76px)}
 body .hero-with-ribbon .hero-bottom{margin-top:0;gap:28px}
 }
