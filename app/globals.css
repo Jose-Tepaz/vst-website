@@ -965,3 +965,7 @@ body .team-slider{gap:24px}
 body .team-slider .team-heading>p{margin-top:12px}
 body .team-carousel{padding-top:0}
 }
+
+/* Móvil: el titular del hero cabe en dos líneas («Convertimos tu idea» / «en software real.») */
+.hero-classic h1 .t-m{display:none}
+@media(max-width:650px){.hero-classic h1 .t-d{display:none}.hero-classic h1 .t-m{display:inline}}
