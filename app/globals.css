@@ -930,3 +930,6 @@ body .hero-classic .phrase-ribbon{overflow:visible}
 /* Con el hero claro, la barra superior también es clara (sin la banda oscura) */
 .header.scroll-header{background:var(--paper);color:var(--ink)}
 .header-space{background:var(--paper)}
+
+/* Móvil: la franja sube a la derecha, así que se baja para que no tape el texto del hero */
+@media(max-width:650px){body .hero-classic .phrase-ribbon{margin-top:64px}}
