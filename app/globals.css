@@ -887,3 +887,6 @@ p,li,figcaption,summary{text-wrap:pretty}
 /* Móvil: las preguntas se quedan fijas y el contacto las cubre, pero con un tramo de scroll antes
    para que se alcance a ver el último acordeón abierto sin que el contacto lo tape de inmediato */
 @media(max-width:850px){.pin-bottom{margin-bottom:45svh}}
+
+/* Móvil: más aire bajo la última pregunta para que el botón flotante no quede pegado al signo + */
+@media(max-width:650px){body .faq-section{padding-bottom:120px!important}}
