@@ -859,8 +859,8 @@ p,li,figcaption,summary{text-wrap:pretty}
 .iphone-shell .demo-content,.iphone-shell .demo-content p,.iphone-shell .demo-content li{font-size:13px}
 .iphone-shell .demo-content h4{font-size:clamp(20px,6.4vw,26px)}
 }
-@media(max-width:850px){.iphone-shell .demo-site-page{padding:14px;min-height:0}.iphone-shell .demo-site-page strong{font-size:16px}.iphone-shell .demo-site-page p{display:none}.iphone-shell .demo-site-nav{padding:10px}}
-@media(max-width:850px){.iphone-shell .demo-site-action{display:none}}
+@media(max-width:850px){.iphone-shell .demo-site-page{padding:14px;min-height:0}.iphone-shell .demo-site-page strong{font-size:16px}.iphone-shell .demo-site-page p{margin-top:8px;font-size:12px;line-height:1.35}.iphone-shell .demo-site-nav{padding:10px}}
+@media(max-width:850px){.iphone-shell .demo-site-action{margin-top:10px;font-size:12px}}
 
 /* "Desde 2022" va en el flujo (antes flotaba y se encimaba con el +4 en móvil) */
 .st-chip{position:static;align-self:flex-start;margin-bottom:auto}
@@ -915,3 +915,18 @@ body .contact-footer .brief-options button{width:100%;min-width:0;min-height:48p
 .contact-footer-signature{margin:0!important;height:0;min-height:0;gap:0}
 .contact-footer-top.cta{position:absolute;right:var(--gutter);bottom:clamp(20px,4vh,36px);width:48px;height:48px;font-size:18px}
 .contact-footer-top.cta:hover{transform:translateY(-4px)}
+
+/* Hero anterior: claro, con titular, texto y la franja azul de frases (sin teléfono ni fondo oscuro) */
+body .hero.hero-classic.hero-with-ribbon{position:static;display:block;min-height:0;padding:0;background:transparent;color:var(--ink);overflow:hidden}
+body .hero-classic h1{color:var(--ink)}
+body .hero-classic .hero-bottom>p{color:var(--ink)}
+body .hero-classic .hero-content{display:block;flex:none;min-height:0;padding-top:65px;justify-content:flex-start}
+body .hero-classic .hero-content h1{font-size:var(--display)}
+body .hero-classic .hero-bottom{flex-direction:row;justify-content:space-between;align-items:center;gap:50px;margin-top:36px;min-height:102px}
+body .hero-classic .phrase-ribbon{overflow:visible}
+@media(max-width:1000px){body .hero-classic .hero-content{padding-top:50px}}
+@media(max-width:650px){body .hero-classic .hero-content{padding-top:35px}body .hero-classic .hero-bottom{flex-direction:column;align-items:stretch;gap:24px;margin-top:28px;min-height:0}body .hero-classic .hero-bottom>p{font-size:17px}}
+
+/* Con el hero claro, la barra superior también es clara (sin la banda oscura) */
+.header.scroll-header{background:var(--paper);color:var(--ink)}
+.header-space{background:var(--paper)}

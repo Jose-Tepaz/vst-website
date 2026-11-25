@@ -3,6 +3,7 @@
 import { RevealTitle } from "@/components/reveal-title";
 
 import Image from "next/image";
+import { PhraseRibbon } from "@/components/phrase-ribbon";
 import { Arrow } from "@/components/arrow";
 import { useEffect, useRef, useState, type PointerEvent, type CSSProperties } from "react";
 
@@ -70,6 +71,7 @@ export function Team() {
       onMouseEnter={() => setEngaged(true)} onMouseLeave={() => setEngaged(false)}
       onFocusCapture={() => setEngaged(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setEngaged(false); }}
       onKeyDown={event => { if (event.key === "ArrowRight" || event.key === "ArrowLeft") { event.preventDefault(); move(event.key === "ArrowRight" ? 1 : -1); } }}>
+      <div className="team-ribbon-background" aria-hidden="true" inert><PhraseRibbon /></div>
       <div className={`team-deck${dragging ? " is-dragging" : ""}`} onPointerDown={startDrag} onPointerMove={updateDrag} onPointerUp={event => finishDrag(event)} onPointerCancel={event => finishDrag(event, true)} onLostPointerCapture={event => finishDrag(event, true)} onDragStart={event => event.preventDefault()}>
         {portraitSlots.map((slot, index) => {
           const depth = (index - active + portraitSlots.length) % portraitSlots.length;

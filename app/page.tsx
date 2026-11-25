@@ -1,5 +1,5 @@
 import { PinBottom } from "@/components/pin-bottom";
-import { HeroMockup } from "@/components/hero-mockup";
+import { PhraseRibbon } from "@/components/phrase-ribbon";
 import { Studio } from "@/components/studio";
 import { ProjectShowcase } from "@/components/project-showcase";
 import { Menu, Motion } from "@/components/interactions";
@@ -24,15 +24,14 @@ export default function Home() {
     <a className="skip-link" href="#contenido">Ir al contenido</a>
     <Menu><Logo /></Menu>
     <main id="contenido">
-      <section id="inicio" className="hero hero-with-ribbon" aria-labelledby="hero-title">
+      <section id="inicio" className="hero hero-with-ribbon hero-classic" aria-labelledby="hero-title">
         <div className="hero-content wrap">
-        <h1 id="hero-title">Del diseño<br /><span className="hl">al despliegue.</span></h1>
+        <h1 id="hero-title">Del diseño<br />al despliegue.</h1>
         <div className="hero-bottom">
-          <p>Somos Vástago. Un estudio boutique de diseño y desarrollo de software. Creamos productos digitales, de la primera idea a las personas que los usan.</p>
-          <a className="cta hero-cta" href="#contacto"><Roll>Cuéntanos tu proyecto</Roll> <Arrow /></a>
+          <p>Somos Vástago. Un estudio boutique de diseño y desarrollo de software. Creamos productos digitales, de la primera idea a las personas que los usan.</p>
         </div>
-          <HeroMockup />
         </div>
+        <PhraseRibbon />
       </section>
 
       <div className="cover-stack">
