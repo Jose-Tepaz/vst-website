@@ -936,3 +936,6 @@ body .hero-classic .phrase-ribbon{overflow:visible}
 
 /* Escritorio: las preguntas se quedan fijas un tramo antes de que el contacto las cubra, para ver la última */
 @media(min-width:851px){.pin-bottom{margin-bottom:55svh}}
+
+/* Móvil: sin la franja azul detrás del carrusel del equipo */
+@media(max-width:650px){.team-ribbon-background{display:none}}
