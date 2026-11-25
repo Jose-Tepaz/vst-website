@@ -880,3 +880,10 @@ p,li,figcaption,summary{text-wrap:pretty}
 @media(max-width:850px),(max-height:699px){.work-card{box-shadow:none;border:0}}
 /* Móvil: el contenido del teléfono reparte su espacio en vez de dejar un hueco al fondo */
 @media(max-width:850px){.iphone-shell .demo-content{display:flex;flex-direction:column;justify-content:space-evenly;gap:0}.iphone-shell .demo-content{zoom:.8}}
+
+/* Al abrir un servicio mientras otro se cierra, el que se cierra colapsa de golpe (el scroll se compensa en el mismo instante) */
+@media(max-width:850px){.service-rail nav.is-snap .service-acc:not(.is-open){transition:none}}
+
+/* Móvil: las preguntas se quedan fijas y el contacto las cubre, pero con un tramo de scroll antes
+   para que se alcance a ver el último acordeón abierto sin que el contacto lo tape de inmediato */
+@media(max-width:850px){.pin-bottom{margin-bottom:45svh}}

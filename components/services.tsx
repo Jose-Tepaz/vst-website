@@ -2,7 +2,7 @@
 
 import { RevealTitle } from "@/components/reveal-title";
 
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { contactHref, services, tidy } from "@/lib/content";
 import { Arrow } from "@/components/arrow";
 import { Roll } from "@/components/roll";
@@ -59,6 +59,28 @@ export function Services() {
     query.addEventListener("change", sync);
     return () => query.removeEventListener("change", sync);
   }, []);
+  // Al abrir uno mientras otro (arriba) se cierra, el contenido se mueve y la página "salta".
+  // El que se cierra colapsa de golpe y se compensa el scroll en el mismo instante, así el servicio
+  // que tocaste se queda donde está y solo se despliega hacia abajo.
+  const anchor = useRef<{ element: HTMLElement; top: number } | null>(null);
+  const [snap, setSnap] = useState(false);
+  function toggle(element: HTMLElement, index: number) {
+    anchor.current = { element, top: element.getBoundingClientRect().top };
+    setSnap(open !== null && open !== index);
+    setOpen(open === index ? null : index);
+  }
+  useLayoutEffect(() => {
+    const saved = anchor.current;
+    anchor.current = null;
+    if (!saved) return;
+    const drift = saved.element.getBoundingClientRect().top - saved.top;
+    if (Math.abs(drift) < 1) return;
+    const root = document.documentElement;
+    const previous = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollBy(0, drift);
+    root.style.scrollBehavior = previous;
+  }, [open]);
   const laneRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     let frame = 0;
@@ -80,7 +102,7 @@ export function Services() {
   }, []);
 
   return <section id="servicios" className="services services-scroll" aria-labelledby="services-title"><div className="wrap"><div className="service-panel"><div className="service-journey">
-    <div className="service-rail"><RevealTitle id="services-title" lines={[{ text: "Lo que" }, { text: "hacemos.", highlight: true }]} /><p>Diseño y desarrollo.<br />Un mismo equipo.</p><nav aria-label="Nuestros servicios">{services.map((service, index) => <Fragment key={service.name}><a href={`#servicio-${index}`} aria-current={!mobile && active === index ? "step" : undefined} aria-expanded={mobile ? open === index : undefined} aria-controls={mobile ? `servicio-panel-${index}` : undefined} onClick={event => { if (!mobile) return; event.preventDefault(); setOpen(open === index ? null : index); }}>{service.name}<span className="service-arrow" aria-hidden="true"><i>+</i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M8 7h9v9" /></svg></span></a>
+    <div className="service-rail"><RevealTitle id="services-title" lines={[{ text: "Lo que" }, { text: "hacemos.", highlight: true }]} /><p>Diseño y desarrollo.<br />Un mismo equipo.</p><nav aria-label="Nuestros servicios" className={snap ? "is-snap" : undefined}>{services.map((service, index) => <Fragment key={service.name}><a href={`#servicio-${index}`} aria-current={!mobile && active === index ? "step" : undefined} aria-expanded={mobile ? open === index : undefined} aria-controls={mobile ? `servicio-panel-${index}` : undefined} onClick={event => { if (!mobile) return; event.preventDefault(); toggle(event.currentTarget, index); }}>{service.name}<span className="service-arrow" aria-hidden="true"><i>+</i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M8 7h9v9" /></svg></span></a>
       <div className={`service-acc${open === index ? " is-open" : ""}`} id={`servicio-panel-${index}`} role="region" aria-label={service.name} inert={open !== index}><div className="service-acc-inner"><article className={`service-chapter service-chapter-${index}`}>
         <div className="service-chapter-copy"><h3>{service.name}</h3><p>{tidy(service.description)}</p><ul>{service.scope.map(scope => <li key={scope}>{scope}</li>)}</ul><a className="cta" href={contactHref(service.short)} aria-label={`Hablemos de tu proyecto: ${service.name}`}><Roll>Hablemos de tu proyecto</Roll> <Arrow /></a></div>
         {open === index && <div className="service-demo-mobile"><ServiceDemo index={index} /></div>}
