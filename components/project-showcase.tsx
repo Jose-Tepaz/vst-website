@@ -73,6 +73,7 @@ export function ProjectShowcase() {
     function step(dir: 1 | -1) {
       if (!inRange(dir) || performance.now() < lockedUntil.current) return;
       lockedUntil.current = performance.now() + STEP_MS;
+      needIdle = true; // el siguiente paso exige que el gesto anterior (y su inercia) haya parado del todo
       show(activeRef.current + dir);
       goTo(activeRef.current, true);
     }

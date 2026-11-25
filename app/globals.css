@@ -933,3 +933,6 @@ body .hero-classic .phrase-ribbon{overflow:visible}
 
 /* Móvil: la franja sube a la derecha, así que se baja para que no tape el texto del hero */
 @media(max-width:650px){body .hero-classic .phrase-ribbon{margin-top:64px}}
+
+/* Escritorio: las preguntas se quedan fijas un tramo antes de que el contacto las cubra, para ver la última */
+@media(min-width:851px){.pin-bottom{margin-bottom:55svh}}
