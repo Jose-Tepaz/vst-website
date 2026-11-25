@@ -939,3 +939,29 @@ body .hero-classic .phrase-ribbon{overflow:visible}
 
 /* Móvil: sin la franja azul detrás del carrusel del equipo */
 @media(max-width:650px){.team-ribbon-background{display:none}}
+
+/* Hero: la franja necesita espacio debajo para que su curva no se corte */
+@media(min-width:651px){body .hero-classic .phrase-ribbon{padding-bottom:80px}}
+@media(max-width:650px){body .hero-classic .phrase-ribbon{padding-bottom:50px}}
+
+/* Móvil: ajustes de espacio y tamaño */
+@media(max-width:650px){
+/* Sin el hueco de arriba de «Lo que hacemos» */
+body .work{padding-bottom:0}
+/* Estudio: tarjetas con menos relleno */
+body .st-card{padding:16px;min-height:0}
+/* Proceso: sin el número grande y tarjetas más pequeñas */
+body .method-card{min-height:0;margin-bottom:16px}
+body .method-card:last-child{margin-bottom:0}
+body .method-numeral{display:none}
+body .method-card-body{grid-template-columns:1fr;gap:0}
+body .method-card-surface{min-height:0;padding:20px}
+body .method-card-copy h3{font-size:34px;margin-bottom:12px}
+body .method-card-copy>p{font-size:16px}
+body .method-card-copy .method-detail{margin-top:14px}
+body .method-icon{width:48px;height:48px}
+/* Equipo: 12px entre título y párrafo, 24px entre la información y las fotos */
+body .team-slider{gap:24px}
+body .team-slider .team-heading>p{margin-top:12px}
+body .team-carousel{padding-top:0}
+}

@@ -26,9 +26,9 @@ export default function Home() {
     <main id="contenido">
       <section id="inicio" className="hero hero-with-ribbon hero-classic" aria-labelledby="hero-title">
         <div className="hero-content wrap">
-        <h1 id="hero-title">Del diseño<br />al despliegue.</h1>
+        <h1 id="hero-title">Convertimos tu idea<br />en software real.</h1>
         <div className="hero-bottom">
-          <p>Somos Vástago. Un estudio boutique de diseño y desarrollo de software. Creamos productos digitales, de la primera idea a las personas que los usan.</p>
+          <p>Somos Vástago, un estudio de diseño y desarrollo. Te ayudamos a crear tu sitio web, tu app o tu agente de IA, y a lanzarlo con un solo equipo de principio a fin.</p>
         </div>
         </div>
         <PhraseRibbon />
