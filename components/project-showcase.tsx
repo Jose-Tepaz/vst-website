@@ -17,6 +17,8 @@ export function ProjectShowcase() {
   const [previous, setPrevious] = useState<number | null>(null);
   const track = useRef<HTMLDivElement>(null);
   const activeRef = useRef(0);
+  const lockedUntil = useRef(0); // pausa entre pasos: nada cambia dos veces seguidas
+  const settleUntil = useRef(0); // mientras dura el desplazamiento suave de un clic en la lista
 
   function show(index: number) {
     if (index === activeRef.current) return;
@@ -28,6 +30,10 @@ export function ProjectShowcase() {
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 851px) and (min-height: 700px)");
     let frame = 0;
+    let wasFixed = false;
+    let needIdle = false; // tras llegar, el primer paso espera un gesto nuevo (la inercia de llegada no cuenta)
+    let lastWheel = 0;
+    let lastDelta = 0;
     function update() {
       frame = 0;
       const element = track.current;
@@ -36,15 +42,26 @@ export function ProjectShowcase() {
       const scrollable = box.height - window.innerHeight;
       if (scrollable <= 0) return;
       const progress = Math.max(0, Math.min(0.999, -box.top / scrollable));
-      show(Math.floor(progress * total));
+      const target = Math.floor(progress * total);
+      const now = performance.now();
+      const fixedNow = box.top <= 1 && box.bottom >= window.innerHeight - 1;
+      if (fixedNow && !wasFixed) { needIdle = true; lastWheel = now; }
+      wasFixed = fixedNow;
+      if (target === activeRef.current) return;
+      if (now < settleUntil.current) return;
+      // Entrando o saliendo de la sección: se acomoda al proyecto que corresponde.
+      const fixed = box.top <= 1 && box.bottom >= window.innerHeight - 1;
+      if (!fixed) { show(target); return; }
+      // Fija y fuera de lugar (arrastre de barra, inercia): solo un paso por pausa, nunca corre solo.
+      if (now < lockedUntil.current) return;
+      lockedUntil.current = now + STEP_MS;
+      show(activeRef.current + (target > activeRef.current ? 1 : -1));
+      goTo(activeRef.current, true);
     }
     function schedule() { if (!frame) frame = requestAnimationFrame(update); }
 
     // Un gesto de scroll = un proyecto, sin importar la fuerza: mientras la sección está fija se
     // intercepta la rueda, el teclado y el toque, y se avanza exactamente un paso con una pausa.
-    let lockedUntil = 0;
-    let lastWheel = 0;
-    let lastDelta = 0;
     let touchY = 0;
     function pinned() {
       const element = track.current;
@@ -54,8 +71,8 @@ export function ProjectShowcase() {
     }
     function inRange(dir: number) { const next = activeRef.current + dir; return next >= 0 && next < total; }
     function step(dir: 1 | -1) {
-      if (!inRange(dir) || performance.now() < lockedUntil) return;
-      lockedUntil = performance.now() + STEP_MS;
+      if (!inRange(dir) || performance.now() < lockedUntil.current) return;
+      lockedUntil.current = performance.now() + STEP_MS;
       show(activeRef.current + dir);
       goTo(activeRef.current, true);
     }
@@ -63,11 +80,17 @@ export function ProjectShowcase() {
       if (event.ctrlKey || !pinned() || Math.abs(event.deltaY) < 2) return;
       const dir = event.deltaY > 0 ? 1 : -1;
       const now = performance.now();
-      const fresh = now - lastWheel > 90 || Math.abs(event.deltaY) > lastDelta * 1.6;
+      if (!wasFixed) { wasFixed = true; needIdle = true; lastWheel = now; } // primer evento ya centrada
+      const gap = now - lastWheel;
+      const fresh = gap > 90 || Math.abs(event.deltaY) > lastDelta * 1.6;
       lastWheel = now;
       lastDelta = Math.abs(event.deltaY);
       if (!inRange(dir)) return; // en los extremos el scroll sigue normal
       event.preventDefault();
+      if (needIdle) {
+        // Recién centrada: se espera a que pare el gesto con el que llegaste antes de cambiar de proyecto.
+        if (gap > 160) needIdle = false; else return;
+      }
       if (fresh) step(dir);
     }
     function onKey(event: KeyboardEvent) {
@@ -109,7 +132,18 @@ export function ProjectShowcase() {
     if (!window.matchMedia("(min-width: 851px) and (min-height: 700px)").matches) { show(index); return; }
     const scrollable = element.offsetHeight - window.innerHeight;
     const top = element.getBoundingClientRect().top + window.scrollY + ((index + 0.5) / total) * scrollable;
-    window.scrollTo({ top, behavior: instant ? ("instant" as ScrollBehavior) : "smooth" });
+    if (instant) {
+      // Salto sin animación: se apaga el scroll suave del documento solo durante el salto.
+      const root = document.documentElement;
+      const previous = root.style.scrollBehavior;
+      root.style.scrollBehavior = "auto";
+      window.scrollTo(0, top);
+      root.style.scrollBehavior = previous;
+      return;
+    }
+    settleUntil.current = performance.now() + 1400;
+    show(index);
+    window.scrollTo({ top, behavior: "smooth" });
   }
 
   function move(event: PointerEvent<HTMLDivElement>) {
